@@ -1,7 +1,7 @@
 /**
  * Minimal in-memory rate limiter (fixed window per key).
  * Good enough for a single instance. On serverless each instance keeps its own
- * window, so swap for a shared store (Upstash, Redis, Vercel KV) in production.
+ * window, so swap for a shared store (Cloudflare KV, Durable Objects, Upstash) in production.
  */
 type Window = { count: number; resetAt: number };
 
