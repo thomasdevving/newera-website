@@ -34,7 +34,7 @@ export default function AanvraagPage() {
 
         <aside className="lg:col-span-4 lg:col-start-9" aria-label="Over uw aanvraag">
           <div className="space-y-px lg:sticky lg:top-[calc(var(--header-h)+32px)]">
-            <div className="border border-accent/50 bg-accent-soft p-6 md:p-7">
+            <div className="border border-line border-t-accent bg-elevated p-6 md:p-7">
               <FileQuestion aria-hidden className="h-5 w-5 text-accent" strokeWidth={1.5} />
               <p className="mt-4 text-lg text-ink">Geen plattegrond bij de hand?</p>
               <p className="mt-2 text-muted">Dien de aanvraag toch in, u kunt later aanvullen.</p>

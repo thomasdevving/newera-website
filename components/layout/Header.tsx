@@ -177,7 +177,6 @@ export function Header() {
                             active ? "text-accent" : "text-ink hover:text-accent",
                           )}
                         >
-                          <span className="tabular w-6 text-xs font-normal tracking-[0.2em] text-muted">{index + 1}</span>
                           {item.label}
                         </Link>
                       </motion.li>

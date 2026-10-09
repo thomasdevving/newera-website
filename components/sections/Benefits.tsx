@@ -31,7 +31,7 @@ export function Benefits() {
         intro="Een keukenproject raakt veel partijen. Wij houden het overzicht, zodat u dat niet hoeft te doen."
       />
 
-      <ol className="border-b border-line">
+      <ol>
         {benefits.map((benefit, index) => (
           <li key={benefit.title} className="group relative">
             <DrawLine delay={index * 0.12} />

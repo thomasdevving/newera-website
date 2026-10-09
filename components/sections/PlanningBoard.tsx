@@ -141,7 +141,6 @@ export function PlanningBoard({ className }: { className?: string }) {
           <span className="absolute top-[7px] left-1/2 -translate-x-1/2 bg-accent px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-bg whitespace-nowrap">
             Vandaag
           </span>
-          <span className="pulse-line absolute inset-0 shadow-[0_0_12px_1px_rgba(201,166,107,0.6)]" />
         </motion.div>
       </div>
       </div>

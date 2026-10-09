@@ -114,7 +114,7 @@ export function DashboardMockup({ compact = false, className }: { compact?: bool
                   </div>
                   <div className="flex items-center justify-between gap-4 sm:justify-end">
                     <PhaseBar completed={completed} delay={0.6 + index * 0.07} />
-                    <Badge tone={badgeTone(project.status)} className="w-[150px] justify-center text-[10px]">
+                    <Badge tone={badgeTone(project.status)} className="w-[176px] justify-center px-2 text-[10px] tracking-[0.08em]">
                       {project.status}
                     </Badge>
                   </div>

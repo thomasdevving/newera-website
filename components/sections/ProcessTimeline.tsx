@@ -72,10 +72,10 @@ function TimelineStep({ step, index }: { step: ProcessStep; index: number }) {
         viewport={{ once: true, margin: "0px 0px -15% 0px" }}
         transition={{ duration: 0.9, ease: easeOut }}
       >
-        <p className="tabular text-sm text-muted">
+        <p className="tabular text-sm text-muted md:hidden">
           Fase {index + 1} van {processSteps.length}
         </p>
-        <h2 className="mt-3 flex items-center gap-4 text-[clamp(1.75rem,3vw,2.5rem)] font-light leading-tight tracking-[-0.02em]">
+        <h2 className="mt-3 flex md:mt-0 items-center gap-4 text-[clamp(1.75rem,3vw,2.5rem)] font-light leading-tight tracking-[-0.02em]">
           <span className={cn("inline-flex h-11 w-11 shrink-0 items-center justify-center border transition-colors duration-700", passed ? "border-accent text-accent" : "border-line-strong text-muted")}>
             <Icon aria-hidden className="h-5 w-5" strokeWidth={1.5} />
           </span>

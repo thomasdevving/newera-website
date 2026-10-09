@@ -10,7 +10,7 @@ const items = [
 
 export function TrustStrip() {
   return (
-    <section aria-label="Waarom Studio NewEra" className="border-y border-line bg-elevated">
+    <section aria-label="Waarom Studio NewEra" className="border-y border-line">
       <Container>
         <ul className="grid divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
           {items.map(({ icon: Icon, title, text }, index) => (

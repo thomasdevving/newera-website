@@ -129,7 +129,7 @@ export function ProcessPreview() {
         id="phase-panel"
         role="tabpanel"
         aria-labelledby={`phase-tab-${step.id}`}
-        className="relative mt-12 grid min-h-[300px] border-t border-line pt-10 md:mt-16 md:min-h-[240px] lg:grid-cols-12 lg:gap-10"
+        className="relative mt-12 grid min-h-[260px] border-t border-line pt-10 md:mt-16 md:min-h-[200px] lg:grid-cols-12 lg:gap-10"
       >
         {autoplay && (
           <motion.span

@@ -38,7 +38,7 @@ export default function ContactPage() {
               </Reveal>
             ))}
           </ul>
-          <Reveal delay={0.3} className="mt-10 border border-accent/50 bg-accent-soft p-6">
+          <Reveal delay={0.3} className="mt-10 border border-line border-t-accent bg-elevated p-6">
             <p className="text-ink">Een project aanvragen?</p>
             <p className="mt-2 text-[15px] text-muted">
               Gebruik daarvoor het aanvraagformulier. Daarin kunt u ook plattegronden meesturen.
