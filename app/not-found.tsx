@@ -23,7 +23,7 @@ export default function NotFound() {
           <FadeIn y={10}>
             <p className="tabular label-caps text-accent">Fout 404</p>
           </FadeIn>
-          <RevealText as="h1" immediate delay={0.1} text="Deze pagina staat niet in de planning." className="mt-6 max-w-[16ch] text-[clamp(2.5rem,6vw,5rem)] font-light leading-[1] tracking-[-0.03em]" />
+          <RevealText as="h1" immediate delay={0.1} text="Deze pagina staat niet in de planning." className="mt-6 max-w-[16ch] text-[clamp(2.5rem,6vw,5rem)] font-light leading-[1.1] tracking-[-0.03em]" />
           <FadeIn delay={0.4}>
             <p className="mt-6 max-w-[48ch] text-lg text-muted">De pagina bestaat niet of is verplaatst. Ga terug naar de homepage of dien direct een aanvraag in.</p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">

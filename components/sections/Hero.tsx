@@ -35,7 +35,7 @@ export function Hero() {
             immediate
             delay={0.15}
             text="Keukenprojecten die op schema blijven."
-            className="max-w-[13ch] text-[clamp(2.6rem,7.4vw,6rem)] font-light leading-[0.98] tracking-[-0.035em]"
+            className="max-w-[13ch] text-[clamp(2.6rem,7.4vw,6rem)] font-light leading-[1.1] tracking-[-0.035em]"
           />
           <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:items-end lg:gap-14">
             <FadeIn delay={0.55}>

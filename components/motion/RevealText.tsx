@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "motion/react";
 import { easeOut } from "@/lib/motion";
 
 type RevealTextProps = {
@@ -12,28 +13,42 @@ type RevealTextProps = {
   immediate?: boolean;
 };
 
-/** Each word rises out of a mask, staggered, like type being set. */
+/** Resolves once the web fonts are loaded, so text never reflows mid-animation. */
+function useFontsReady() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    let active = true;
+    // Fall back after a short wait so a slow font never hides the heading
+    const timer = window.setTimeout(() => active && setReady(true), 1500);
+    (document.fonts?.ready ?? Promise.resolve()).then(() => active && setReady(true));
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+    };
+  }, []);
+  return ready;
+}
+
+/**
+ * Heading that wipes up into view as one block of normal running text.
+ * It waits for the font, so the line breaks are final before it appears.
+ */
 export function RevealText({ text, as = "h2", className, delay = 0, immediate }: RevealTextProps) {
   const Tag = motion[as];
-  const words = text.split(" ");
-  const trigger = immediate ? { animate: "show" } : { whileInView: "show", viewport: { once: true, margin: "0px 0px -10% 0px" } };
+  const ref = useRef<HTMLHeadingElement>(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
+  const fontsReady = useFontsReady();
+  const show = fontsReady && (immediate || inView);
 
   return (
-    <Tag className={className} initial="hidden" {...trigger} transition={{ staggerChildren: 0.06, delayChildren: delay }}>
-      {words.map((word, index) => (
-        <span key={`${word}-${index}`} className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-top">
-          <motion.span
-            className="inline-block"
-            variants={{
-              hidden: { y: "110%" },
-              show: { y: "0%", transition: { duration: 1, ease: easeOut } },
-            }}
-          >
-            {word}
-          </motion.span>
-          {index < words.length - 1 && " "}
-        </span>
-      ))}
+    <Tag
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 24, clipPath: "inset(0% 0% 100% 0%)" }}
+      animate={show ? { opacity: 1, y: 0, clipPath: "inset(-20% -5% -20% -5%)" } : undefined}
+      transition={{ duration: 1, ease: easeOut, delay }}
+    >
+      {text}
     </Tag>
   );
 }

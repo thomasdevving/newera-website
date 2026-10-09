@@ -24,7 +24,7 @@ export function PortalTeaser() {
           </Reveal>
           <RevealText
             text="Uw projecten, per fase in beeld."
-            className="mt-6 text-[clamp(2rem,4vw,3.25rem)] font-light leading-[1.05] tracking-[-0.025em]"
+            className="mt-6 text-[clamp(2rem,4vw,3.25rem)] font-light leading-[1.1] tracking-[-0.025em]"
           />
           <Reveal delay={0.15}>
             <p className="mt-6 text-lg text-muted">

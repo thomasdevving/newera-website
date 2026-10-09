@@ -20,7 +20,7 @@ export function CtaBanner({
       <Arc inView className="-bottom-[60%] -right-[10%] h-[180%] w-[110%] min-w-[700px] opacity-40 md:w-[75%] lg:opacity-100" delay={0.1} />
       <Container className="relative grid gap-10 py-24 md:py-32 lg:grid-cols-12 lg:items-end xl:py-[140px]">
         <div className="lg:col-span-8">
-          <RevealText text={title} className="max-w-[16ch] text-[clamp(2.4rem,6vw,5rem)] font-light leading-[1] tracking-[-0.03em]" />
+          <RevealText text={title} className="max-w-[16ch] text-[clamp(2.4rem,6vw,5rem)] font-light leading-[1.1] tracking-[-0.03em]" />
           <Reveal delay={0.2}>
             <p className="mt-6 max-w-[52ch] text-lg text-muted">{text}</p>
           </Reveal>

@@ -29,7 +29,7 @@ export function SectionHeader({ label, title, intro, action, className }: Sectio
           </p>
         </Reveal>
         <div className="lg:col-span-9">
-          <RevealText text={title} className="max-w-[20ch] text-[clamp(2rem,4.2vw,3.75rem)] font-light leading-[1.05] tracking-[-0.025em]" />
+          <RevealText text={title} className="max-w-[20ch] text-[clamp(2rem,4.2vw,3.75rem)] font-light leading-[1.1] tracking-[-0.025em]" />
           {(intro || action) && (
             <Reveal delay={0.15} className="mt-6 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
               {intro && <div className="max-w-[60ch] text-lg text-muted">{intro}</div>}

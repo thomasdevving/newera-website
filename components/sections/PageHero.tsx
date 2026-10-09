@@ -32,7 +32,7 @@ export function PageHero({ label, title, intro, children, arc = true }: PageHero
             immediate
             delay={0.1}
             text={title}
-            className="max-w-[18ch] text-[clamp(2.5rem,6vw,5.25rem)] font-light leading-[1] tracking-[-0.035em]"
+            className="max-w-[18ch] text-[clamp(2.5rem,6vw,5.25rem)] font-light leading-[1.1] tracking-[-0.035em]"
           />
           {intro && (
             <FadeIn delay={0.45}>
