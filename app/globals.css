@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #0a0a0a;
+  --bg-elevated: #121212;
+  --bg-elevated-2: #181818;
+  --text: #f5f3ef;
+  --text-muted: #a8a39a;
+  --text-faint: rgba(245, 243, 239, 0.42);
+  --accent: #c9a66b;
+  --accent-bright: #dcbd86;
+  --accent-soft: rgba(201, 166, 107, 0.15);
+  --border: rgba(245, 243, 239, 0.1);
+  --border-strong: rgba(245, 243, 239, 0.2);
+  --success: #6fbf8e;
+  --error: #e07a6b;
+
+  --header-h: 72px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-elevated: var(--bg-elevated);
+  --color-elevated-2: var(--bg-elevated-2);
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-accent-soft: var(--accent-soft);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-success: var(--success);
+  --color-error: var(--error);
+
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--bg);
+  scroll-padding-top: calc(var(--header-h) + 24px);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  font-feature-settings: "ss01", "tnum" 0;
+  caret-color: var(--accent);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+
+a {
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Scrollbar in the palette */
+html {
+  scrollbar-color: #2a2926 var(--bg);
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2926;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Native form controls */
+input,
+textarea,
+select {
+  font: inherit;
+}
+input::placeholder,
+textarea::placeholder {
+  color: rgba(245, 243, 239, 0.5);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-elevated) inset;
+  -webkit-text-fill-color: var(--text);
+}
+
+/* ---------- Utilities ---------- */
+
+/* Small uppercase label with wide tracking */
+.label-caps {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* Faint vertical week columns used as page texture */
+.week-grid {
+  background-image: linear-gradient(to right, var(--border) 1px, transparent 1px);
+  background-size: calc(100% / var(--cols, 12)) 100%;
+}
+
+/* Continuous marquee, paused for reduced motion */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes pulse-line {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.pulse-line {
+  animation: pulse-line 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .pulse-line {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
