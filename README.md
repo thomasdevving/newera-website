@@ -1,6 +1,6 @@
 # Studio NewEra website
 
-Marketing website for Studio NewEra, a Dutch company that designs, supplies and installs kitchens for business customers only. Built with Next.js (App Router), TypeScript, Tailwind CSS v4, Motion, react-hook-form and zod.
+Marketing website for Studio NewEra, a Dutch company that designs, supplies and installs kitchens for business customers only. Built with Next.js (App Router), TypeScript, Tailwind CSS v4, Motion, react-hook-form and zod. Hosted on Cloudflare Workers through the OpenNext adapter.
 
 ## Setup
 
@@ -10,9 +10,21 @@ npm run dev      # http://localhost:3000
 npm run build    # production build
 npm run start    # serve the production build
 npm run lint
+npm run preview  # build and run in the Cloudflare Workers runtime locally
+npm run deploy   # build and deploy to Cloudflare (needs `npx wrangler login` once)
 ```
 
 Requires Node.js 20.9 or newer.
+
+## Hosting on Cloudflare
+
+The site runs on Cloudflare Workers (free plan) via `@opennextjs/cloudflare`. Configuration lives in `wrangler.jsonc` and `open-next.config.ts`.
+
+- Next.js is pinned to 16.3.8: the adapter does not yet handle a manifest file introduced in 16.4. Upgrade once `@opennextjs/cloudflare` supports it, and test with `npm run preview` first.
+- `next/image` runs unoptimized, because Workers has no built-in Next.js image optimizer. Images in `public/` should be exported at the size they are shown (the logo is a 600px WebP).
+- Environment variables for production are set in the Cloudflare dashboard (Workers, studio-newera, Settings, Variables and Secrets) or with `npx wrangler secret put NAME`.
+- Server logs (including submitted requests while no mail provider is connected) appear under Workers, studio-newera, Logs, or live with `npx wrangler tail`.
+- A custom domain can be attached under Workers, studio-newera, Settings, Domains and Routes. Then set `NEXT_PUBLIC_SITE_URL` to that domain and redeploy.
 
 ## Structure
 
@@ -51,7 +63,7 @@ lib/
 | What | Where |
 | --- | --- |
 | Company name, contact details, KvK, btw, address, response time | `lib/site-config.ts` |
-| Logo | Replace `public/brand/logo.png`, or change `siteConfig.logo` (path and pixel size). Only `components/ui/Logo.tsx` reads it. |
+| Logo | Replace `public/brand/logo.webp` (shown on the site; `logo.png` is the full-size source), or change `siteConfig.logo` (path and pixel size). Only `components/ui/Logo.tsx` reads it. |
 | Photography | Put files in `public/images/` and set the paths in `images` in `lib/site-config.ts`. Empty slots show "Afbeelding volgt". |
 | Process phases and texts | `lib/process.ts` |
 | Open Graph image | `public/og.png` (1200x630) |
@@ -76,7 +88,7 @@ Submissions currently go to the server log. To send real email with Resend, set 
 
 `lib/storage.ts` defines a `StorageAdapter` with one method, `save(file, folder)`. Implement it for S3, Supabase Storage or Azure Blob, select it in `getStorage()`, and the request endpoint will include the stored URLs in the email.
 
-Important on Vercel: serverless functions accept request bodies up to 4.5 MB. The form allows 5 files of 10 MB each, so for production uploads switch to direct-to-storage uploads with presigned URLs. Until then the form shows a clear message when the attachments are too large.
+On Cloudflare Workers the request body limit is 100 MB on the free plan, so the form's limit of 5 files of 10 MB each fits. Workers parse uploads in 128 MB of memory, so for heavy use switch to direct-to-storage uploads with presigned URLs. If a body is ever rejected as too large, the form shows a clear message.
 
 ## Adding the customer portal
 
@@ -95,7 +107,7 @@ No tracking scripts are included. If analytics are added, a consent banner belon
 - The brief asked for "je/jij" in form microcopy, but all literal copy in the brief (validation messages, confirmation, process steps) uses "u". The site uses "u" consistently.
 - Outfit was chosen from the two allowed fonts because its geometric forms and single-storey "a" match the wordmark.
 - Week numbers, project names and statuses in the hero planning and the portal mockup are demonstration data and labelled "Voorbeeldplanning" or "Voorbeeldweergave".
-- The rate limiter is in memory. On serverless platforms each instance has its own window; use a shared store for strict limits.
+- The rate limiter is in memory. On Cloudflare Workers each isolate has its own window; use a shared store (KV, Durable Objects) for strict limits.
 - The copyright year is rendered at build time.
 
 ## Still needed from Studio NewEra

@@ -9,7 +9,7 @@ export const siteConfig = {
   description:
     "Studio NewEra ontwerpt, levert en monteert keukens voor aannemers, projectontwikkelaars, woningcorporaties en bouwpartners. Eén partner van aanvraag tot service.",
   tagline: "Keukens voor zakelijke opdrachtgevers, van aanvraag tot service.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://studio-newera.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://studio-newera.workers.dev",
   locale: "nl_NL",
 
   /** Number of working days we promise to respond within. */
@@ -17,7 +17,7 @@ export const siteConfig = {
 
   /** Swap the logo by replacing the file or pointing `src` elsewhere. */
   logo: {
-    src: "/brand/logo.png",
+    src: "/brand/logo.webp",
     width: 920,
     height: 260,
     alt: "Studio NewEra",

@@ -10,7 +10,7 @@ web
 
 ## Stack
 
-Brief-pinned: Next.js (App Router) + TypeScript + Tailwind CSS, react-hook-form + zod, Motion, lucide-react. Hosted on Vercel.
+Brief-pinned: Next.js (App Router) + TypeScript + Tailwind CSS, react-hook-form + zod, Motion, lucide-react. Hosted on Cloudflare Workers (free plan) through the OpenNext adapter.
 
 ## Users
 

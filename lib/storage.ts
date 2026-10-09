@@ -8,8 +8,9 @@
  *   - "s3":       AWS S3 or any S3-compatible bucket (@aws-sdk/client-s3)
  *   - "supabase": Supabase Storage (@supabase/supabase-js)
  *   - "azure":    Azure Blob Storage (@azure/storage-blob)
- * Note: Vercel functions accept request bodies up to 4.5 MB. For larger
- * uploads, switch the form to direct-to-storage uploads with presigned URLs.
+ * Note: Cloudflare Workers accept request bodies up to 100 MB on the free plan,
+ * but parse them in 128 MB of memory. For heavy use, switch the form to
+ * direct-to-storage uploads with presigned URLs.
  */
 
 export type StoredFile = {
