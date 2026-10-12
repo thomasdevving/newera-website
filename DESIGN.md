@@ -1,6 +1,6 @@
 ---
 name: Studio NewEra
-description: Kitchens for professional builders, shown as a construction planning on a near-black board.
+description: Kitchens for professional builders, shown in dark, photo-led premium pages with one warm paper band per page.
 colors:
   ground: "#0a0a0a"
   board: "#121212"
@@ -11,28 +11,39 @@ colors:
   champagne: "#c9a66b"
   champagne-bright: "#dcbd86"
   champagne-wash: "rgba(201, 166, 107, 0.15)"
+  bronze: "#7a5b2b"
   hairline: "rgba(245, 243, 239, 0.1)"
   hairline-strong: "rgba(245, 243, 239, 0.2)"
+  paper: "#eeeae3"
+  paper-ink: "#16140f"
+  paper-muted: "#5c564c"
+  paper-line: "rgba(22, 20, 15, 0.14)"
   signal-green: "#6fbf8e"
   signal-red: "#e07a6b"
 typography:
   display:
     fontFamily: "Outfit, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2.6rem, 7.4vw, 6rem)"
+    fontSize: "clamp(2.6rem, 6.6vw, 5.75rem)"
     fontWeight: 300
-    lineHeight: 0.98
+    lineHeight: 1.05
     letterSpacing: "-0.035em"
   headline:
     fontFamily: "Outfit, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2rem, 4.2vw, 3.75rem)"
+    fontSize: "clamp(2.25rem, 5vw, 4.25rem)"
     fontWeight: 300
-    lineHeight: 1.05
+    lineHeight: 1.08
+    letterSpacing: "-0.03em"
+  headline-section:
+    fontFamily: "Outfit, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2rem, 4vw, 3.25rem)"
+    fontWeight: 300
+    lineHeight: 1.1
     letterSpacing: "-0.025em"
   title:
     fontFamily: "Outfit, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(1.75rem, 3vw, 2.5rem)"
+    fontSize: "clamp(1.75rem, 3.4vw, 2.75rem)"
     fontWeight: 300
-    lineHeight: 1.25
+    lineHeight: 1.1
     letterSpacing: "-0.02em"
   body:
     fontFamily: "Outfit, ui-sans-serif, system-ui, sans-serif"
@@ -44,17 +55,22 @@ typography:
     fontFamily: "Outfit, ui-sans-serif, system-ui, sans-serif"
     fontSize: "15px"
     fontWeight: 400
-    lineHeight: 1.6
+    lineHeight: 1.4
+  nav:
+    fontFamily: "Outfit, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "12px"
+    fontWeight: 500
+    letterSpacing: "0.16em"
   label:
     fontFamily: "Outfit, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.75rem"
+    fontSize: "11px"
     fontWeight: 500
-    letterSpacing: "0.28em"
+    letterSpacing: "0.12em"
   data:
     fontFamily: "Outfit, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "11px"
+    fontSize: "12px"
     fontWeight: 400
-    letterSpacing: "0.08em"
+    letterSpacing: "0.18em"
     fontFeature: "\"tnum\""
 rounded:
   none: "0px"
@@ -62,9 +78,10 @@ spacing:
   gutter-sm: "16px"
   gutter-md: "40px"
   gutter-xl: "56px"
-  section-compact: "80px"
-  section: "128px"
-  section-xl: "140px"
+  section-compact: "48px"
+  section-sm: "64px"
+  section: "96px"
+  section-xl: "100px"
   container: "1360px"
   header: "72px"
 components:
@@ -102,58 +119,78 @@ components:
     rounded: "{rounded.none}"
     padding: "0 8px"
     height: "24px"
-  phase-node:
+  paper-band:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.paper-ink}"
+    rounded: "{rounded.none}"
+  paper-link:
+    textColor: "{colors.bronze}"
+  slide-marker:
+    backgroundColor: "{colors.hairline-strong}"
+    height: "2px"
+    width: "48px"
+  slide-marker-active:
+    backgroundColor: "{colors.champagne}"
+  step-node:
     backgroundColor: "{colors.ground}"
     rounded: "{rounded.none}"
     size: "11px"
-  phase-node-passed:
-    backgroundColor: "{colors.champagne}"
 ---
 
 # Design System: Studio NewEra
 
 ## Overview
 
-**Creative North Star: "The Bouwplanning"**
+**Creative North Star: "The Dark Showroom"**
 
-The whole system is a construction schedule pinned to a dark wall. Week columns, phase rows, flat bars and square nodes are not decoration on top of the page; they are the page's grammar. Being on schedule is shown, never claimed: a gold "vandaag" line crossing a planning says more than any slogan.
+The site is a short, dark, premium showroom where the kitchens do the talking. Full-bleed photography carries the first impression: a full-height slideshow of kitchens on the home page, darkened photographs behind inner page heroes and behind the closing call-to-action strip. Off-white light type sits over deep gradients that darken from the left and the bottom, so the words always read and the photograph keeps its warmth on the right.
 
-The surface is a near-black ground with off-white type set large and light, divided by 1px hairlines. Champagne gold is the one voice and it marks only what is live: the primary action, the active phase, today, small functional icons and the logo arc. Everything is cut square; the user asked for a site "zo strak mogelijk", with as few soft edges as possible, and the build carries zero corner radius everywhere.
+Against the near-black, each page turns over once into a warm paper band: a light, calm section in dark ink where the process, the audience or the values are explained. That single change of material is the page's breath; it is never repeated twice on one page. Champagne gold remains the one voice on the dark ground and marks what is live or actionable; on paper, gold fails contrast for text, so small accent text there turns bronze.
 
-Motion behaves like a plan being set out: lines draw from left to right, words rise out of a mask as if being typeset, and everything decelerates on one exponential ease-out. Motion is medium to heavy by request, and always yields to reduced-motion preferences.
+The brand is carried by two pieces of the logo: the thin gold arc, which draws itself in behind heroes, and the three bars of the "E", now a glyph for bullets and the slide markers. Every corner is square, by the user's request for a site "zo strak mogelijk". Motion is subtle by client request: short fades and wipes on one exponential ease-out, no long delays, and headings wait for the web font so they never reflow mid-animation.
 
 **Key Characteristics:**
+- Photo-led: full-height kitchen slideshow with slow zoom, darkened photos behind page heroes and the closing strip.
 - Near-black ground, off-white light type, champagne gold reserved for what is live.
-- Planning-board grammar: week columns, phase rows, flat bars, square nodes, tabular week numbers.
-- 1px hairlines at 10% off-white as the only structure; no shadows at rest.
-- Zero corner radius on every element.
-- Drawn lines, masked word reveals, one exponential ease-out.
+- One warm paper band per page, dark ink, bronze for small accent text.
+- The logo's arc and its "E" bars as the only brand devices.
+- Zero corner radius on every element; 1px hairlines as structure; no shadows at rest.
+- Subtle motion: short fades and clip wipes, one exponential ease-out.
 
 ## Colors
 
-A monochrome near-black and chalk palette with a single champagne gold accent that means "active" or "act here".
+A near-black and chalk palette with a single champagne accent, plus one warm paper surface that inverts the page once.
 
 ### Primary
-- **Champagne** (champagne): primary button fill, the active phase bar, the "vandaag" line and its tag, passed timeline nodes and the scroll-filled timeline spine, the active nav underline, focus outline, selection, checked checkboxes, required-field asterisks, small phase icons and functional labels. It is the logo's arc colour, pinned by the brief.
+- **Champagne** (champagne): primary button fill, slide-marker progress, the active nav underline, step nodes and step numbers, focus outline and selection on dark, checked checkboxes, required-field asterisks, the "approve" action and highlighted row in the portal mockup, small functional icons, and the logo arc. It is the logo's arc colour, pinned by the brief.
 - **Champagne Bright** (champagne-bright): only the hover wipe on the primary button; never a resting colour.
-- **Champagne Wash** (champagne-wash): the fill of the accent badge, behind champagne text.
+- **Champagne Wash** (champagne-wash): the fill of the accent badge and the highlighted mockup row, behind champagne text.
+
+### Secondary
+- **Bronze** (bronze): the champagne voice translated for the paper band: small accent text, inline links, icons and the focus outline on paper. It holds 5.2:1 on Paper where Champagne manages only 1.9:1.
 
 ### Neutral
-- **Ground** (ground): the page, html background, theme colour.
-- **Board** (board): cards, form controls, autofill fill; one step lifted from the ground.
+- **Ground** (ground): the page, html background, and the base of every photo gradient.
+- **Board** (board): cards, form controls, the portal mockup frame, autofill fill; one step lifted from the ground.
 - **Board Raised** (board-raised): focused form controls.
-- **Chalk** (chalk): headings, body copy on emphasis, completed phase text.
-- **Chalk Muted** (chalk-muted): intros, supporting copy, inactive nav, field hints.
-- **Chalk Faint** (chalk-faint): week numbers, row indices and other planning metadata.
-- **Hairline** (hairline): every divider, row rule, card border, section rule and the week-column texture.
-- **Hairline Strong** (hairline-strong): borders of interactive controls (secondary button, inputs, checkbox, icon buttons) and planned-but-not-started bars.
+- **Chalk** (chalk): headings and emphasised copy; at 80% it carries hero subtext and captions over photographs.
+- **Chalk Muted** (chalk-muted): intros, supporting copy, step summaries, field hints.
+- **Chalk Faint** (chalk-faint): timestamps and quiet metadata.
+- **Hairline** (hairline): every divider on dark, row rule, card border and section edge.
+- **Hairline Strong** (hairline-strong): borders of interactive controls, the step rail, inactive slide markers.
+- **Paper** (paper): the one warm light band per page.
+- **Paper Ink** (paper-ink): headings and body copy on Paper; selection fill on Paper.
+- **Paper Muted** (paper-muted): supporting copy and numerals on Paper (6:1).
+- **Paper Line** (paper-line): grid rules and dividers on Paper.
 
 ### Tertiary (status only)
 - **Signal Green** (signal-green): success badges and form success states.
 - **Signal Red** (signal-red): invalid control borders and error messages.
 
 ### Named Rules
-**The Live Gold Rule.** Champagne marks only what is active, current or actionable. If an element is neither the next action nor the current state, it is chalk or hairline.
+**The Live Gold Rule.** On the dark ground, Champagne marks only what is active, current or actionable. If an element is neither the next action nor the current state, it is chalk or hairline.
+
+**The Bronze On Paper Rule.** Gold never sets text on Paper. Small accent text, links and icons there are Bronze; Champagne may appear on Paper only as a non-text hover line.
 
 **The One Wipe Rule.** Champagne Bright exists only as the hover wipe inside the primary button.
 
@@ -161,46 +198,54 @@ A monochrome near-black and chalk palette with a single champagne gold accent th
 
 **Display Font:** Outfit (with ui-sans-serif, system-ui)
 **Body Font:** Outfit
-**Label/Mono Font:** Outfit with tabular numerals for weeks and phase numbers
+**Label/Mono Font:** Outfit with tabular numerals for step numbers, counters and data
 
-**Character:** A single geometric sans whose single-storey forms echo the NewEra wordmark. Headlines are set light and large with tight negative tracking; weight carries almost no hierarchy, size does.
+**Character:** One geometric sans whose single-storey forms echo the NewEra wordmark, deliberately kept over the serif of the photographic reference. Headlines are set light and large with negative tracking and tight leading; size carries hierarchy, weight barely does.
 
 ### Hierarchy
-- **Display** (display): the home hero headline only, max ~13ch, word-by-word masked reveal.
-- **Headline** (headline): section and page headings, max ~20ch, masked reveal on scroll.
-- **Title** (title): phase titles in the timeline, large mobile menu items, panel headings.
-- **Body** (body): running copy and hero subtext, max 52 to 60ch, muted for intros. Larger intros step up to 18 to 20px.
-- **Body Small** (body-small): field labels, definition lists, secondary button text.
-- **Label** (label): uppercase, wide-tracked functional labels: figure captions such as the planning caption, footer column headings, the form summary heading, badges (at 11px, 0.12em) and the "vandaag" tag (10px, 0.14em). The client brief also pins this style, in Champagne with a short 1px rule, as the section label: the hero line "Keukens voor professionals" and the left-rail label of SectionHeader and PageHero. That use is a brief commitment, not drift.
-- **Data** (data): week numbers, row indices and phase numbers, always tabular, in Chalk Faint.
+- **Display** (display): the home hero headline only, max about 13ch.
+- **Headline** (headline): inner page hero headings, max about 20ch.
+- **Headline Section** (headline-section): section headings on dark and on paper; between 2rem and 3.25rem depending on the section's weight.
+- **Title** (title): the closing CTA line and large mobile menu items.
+- **Body** (body): running copy; hero and page intros step up to 18 to 20px at about 80% Chalk, max 40 to 56ch.
+- **Body Small** (body-small): step and card summaries, field labels, inline text links.
+- **Nav** (nav): desktop navigation labels, uppercase, wide tracked.
+- **Label** (label): uppercase functional labels: badges, slide captions (12px, 0.18em), the mockup's "Voorbeeldweergave" tag and approval heading.
+- **Section label** (label): a short uppercase label in Champagne (Bronze on Paper) with a 24 to 32px 1px rule before it, set above a section or page heading: the hero line "Keukens voor professionals", PageHero, PortalTeaser, ProcessOverview and the Voor wie band. This is a deliberate commitment, not drift: the client brief names the hero label explicitly and the user's reference design uses the same device. Keep it to one per section and never stack it with a second kicker.
+- **Data** (data): step numbers ("01" to "09"), the slide counter, mockup counts; always tabular.
 
 ### Named Rules
-**The Light Headline Rule.** Headings are weight 300 with negative tracking. Weight 500 is reserved for buttons and labels. Only weights 300, 400 and 500 are loaded.
+**The Tight Heading Rule.** Headings sit at line-height 1.05 to 1.1, never looser; the user asked for tighter heading spacing and the build holds it everywhere.
 
-**The Tabular Week Rule.** Every week number, phase number and count is set with tabular numerals so columns align like a schedule.
+**The Light Weight Rule.** Headlines are Outfit 300; hierarchy comes from size, not weight.
 
 ## Layout
 
-A single framed container (max 1360px) with gutters of 16, 24, 40 and 56px from mobile to extra-wide. Sections breathe on a long vertical rhythm (96px, 128px, then 140px on wide screens; 64 to 80px for compact bands), optionally opened by a 1px top rule. The header is fixed at 72px, transparent at the top, then solid ground at 80% with blur and a hairline once scrolled; it tucks away on downward scroll.
+A single 1360px container with 16, 24, 40 and 56px side gutters at the sm, md and xl steps. The site is short by client request: each page is a photo hero, a few dark sections, one paper band and a closing photo strip.
 
-Section openings use a 12-column split: a narrow left rail (3 columns) and heading plus intro on the right (9 columns), preceded by a drawn hairline. Planning content uses a fixed label column followed by proportional week columns; the faint week-column texture (1px hairlines at an even column count, 16 in the hero, 6 in the mobile menu) can run behind content to tie it to the schedule. On narrow screens week labels thin out (every fourth, then every second) rather than shrinking.
+- **Home hero:** full viewport height (min 680px from lg), content anchored to the bottom left above a hairline-ruled control row, the arc floating top right.
+- **Inner page hero:** compact band, padded below the 72px fixed header, with a darkened photograph or the arc behind.
+- **Section rhythm:** standard sections at 64, 96 and 100px vertical padding; compact sections at 48 to 56px; paper bands at 56 to 64px rising to 80 to 96px.
+- **Grids:** twelve-column splits on lg (for example 4 to 8 for the portal teaser); four-step cards on paper in a ruled grid, 1, 2 then 4 columns.
+- **The stepper** is horizontal across nine columns from xl (1280px) and a vertical rail below.
+- **Header:** fixed, transparent over heroes, gaining an 80% Ground fill, hairline and backdrop blur once scrolled; hides on scroll down. Desktop nav from lg; full-screen menu below.
 
 ### Named Rules
-**The Schedule Grid Rule.** Things that represent time sit on columns that represent weeks; nothing time-related floats free of the grid.
+**The One Paper Band Rule.** Each page gets exactly one Paper section. Two light bands on one page break the dark showroom.
 
 ## Elevation & Depth
 
-Flat. Depth comes from tonal steps (ground, board, board raised) and 1px hairlines, never from shadows at rest. The single shadow in the system is a soft gold glow under the primary button on hover, a state response rather than an elevation level.
+Flat by default. Depth comes from photography and gradients, not shadows: photos sit under two Ground gradients (left to right, and bottom to top) so type always clears contrast, and the closing strip dims its photo further. Surfaces separate by a tonal step (Ground to Board) or a 1px hairline. The only shadow is a gold glow under the primary button on hover; the scrolled header uses a backdrop blur.
 
 ### Shadow Vocabulary
 - **Action glow** (`box-shadow: 0 8px 28px -12px rgba(201,166,107,0.75)`): primary button hover only.
 
 ### Named Rules
-**The Flat Board Rule.** Surfaces are flat at rest; separate them with a tonal step or a hairline, not a shadow.
+**The Gradient Not Shadow Rule.** Photos are made legible with Ground gradients; nothing floats on a drop shadow.
 
 ## Shapes
 
-Every corner is square (0px): buttons, inputs, checkboxes, cards, badges, icon buttons, timeline nodes and planning bars. Bars are flat rectangles (8 to 10px tall); nodes are 11px squares that fill gold and scale up when passed. Lines are 1px. The logo's gold arc is the only curve in the world, and it belongs to the logo and its large background echo, not to UI chrome.
+Every corner is square (0px): buttons, inputs, checkboxes, cards, badges, icon buttons, step nodes, slide markers, mockup chrome and photo frames. Lines are 1px; slide markers and the E-bar glyph are 2px. The logo's gold arc is the only curve in the world and belongs to the logo and its large background echo behind heroes.
 
 ### Named Rules
 **The Strak Rule.** Zero radius, everywhere. If a corner rounds, it is wrong.
@@ -208,54 +253,68 @@ Every corner is square (0px): buttons, inputs, checkboxes, cards, badges, icon b
 ## Components
 
 ### Buttons
-Square, confident, and drawn rather than faded.
-- **Shape:** square corners (0px); heights 40, 48, 56px for sm, md, lg with 16, 24, 32px side padding.
-- **Primary:** Champagne fill, Ground text, weight 500, 0.01em tracking. On hover a Champagne Bright layer wipes in from the left (scaleX, 500ms ease-out) and the action glow appears.
-- **Secondary:** transparent with a Hairline Strong border and Chalk text; border and text turn Champagne on hover.
-- **Ghost:** text only, Chalk to Champagne on hover.
-- **Arrow:** an optional trailing arrow (1.5 stroke) slides out right while a twin slides in from the left.
-- **Focus:** 1px Champagne outline, 3px offset (global).
+Square and confident; the fill wipes rather than fades.
+- **Shape:** square (0px); 40, 48, 56px tall for sm, md, lg with 16, 24, 32px side padding; weight 500, 0.01em tracking.
+- **Primary:** Champagne fill, Ground text. On hover a Champagne Bright layer wipes in from the left (500ms) and the action glow appears.
+- **Secondary:** transparent, Hairline Strong border, Chalk text; border and text turn Champagne on hover. Over photographs it takes a 30% Ground fill with a light blur.
+- **Ghost:** text only, Chalk to Champagne.
+- **Arrow:** optional trailing arrow (1.5 stroke) that slides out right while a twin slides in.
+- **Focus:** 1px Champagne outline, 3px offset (Bronze on Paper).
 
 ### Chips / Badges
-- **Style:** square, 24px tall, 1px border, 11px uppercase label at 0.12em. Tones: neutral (Hairline Strong border, Chalk), accent (Champagne at 60% border, Champagne Wash fill, Champagne text), success (Signal Green), muted (Hairline border, Chalk Muted).
+- **Style:** square, 24px tall, 1px border, uppercase label. Tones: neutral (Hairline Strong, Chalk), accent (Champagne at 60% border, Champagne Wash fill, Champagne text), success (Signal Green), muted (Hairline, Chalk Muted).
 
 ### Cards / Containers
 - **Corner Style:** square (0px).
-- **Background:** Board.
+- **Background:** Board on dark; Paper with Paper Line rules on the paper band.
 - **Shadow Strategy:** none; see Elevation & Depth.
-- **Border:** 1px Hairline.
+- **Border:** 1px Hairline (Paper Line on paper). Paper step cards tint 3% Paper Ink on hover and draw a 2px Champagne line across the top.
 
 ### Inputs / Fields
-- **Style:** Board fill, 1px Hairline Strong border, square, 48px tall, 16px text, 16px side padding. Labels sit above in body-small Chalk; optional fields say "Optioneel" in Chalk Muted, required ones carry a Champagne asterisk.
-- **Focus:** border turns Champagne and the fill steps up to Board Raised; no glow.
+- **Style:** Board fill, 1px Hairline Strong border, square, 48px, 16px text and side padding. Labels above in body-small Chalk; optional fields say "Optioneel" in Chalk Muted; required fields carry a Champagne asterisk.
+- **Focus:** border turns Champagne, fill steps to Board Raised; no glow.
 - **Error / Disabled:** Signal Red border and message with a small alert icon, linked by aria-describedby; disabled at 50% opacity.
-- **Checkbox:** 20px square, fills Champagne when checked with a Ground check that scales in.
+- **Checkbox:** 20px square, Champagne when checked.
 
 ### Navigation
-- **Desktop:** 14px Chalk Muted links at 0.02em; hover draws a 1px Chalk underline from the left; the active link gets a 1px Champagne underline that glides between items.
-- **Mobile:** a full-screen Ground panel revealed top-down with a clip-path wipe, faint week columns behind, large light links divided by hairlines, active link in Champagne, square 40px icon buttons.
+- **Desktop:** uppercase 12px labels at 0.16em in 70% Chalk, full Chalk when active or hovered; hover draws a faint underline from the left, the active link carries a 1px Champagne underline that glides between items.
+- **Mobile:** full-screen Ground panel revealed with a top-down clip wipe, large light links divided by hairlines, active link in Champagne, square 40px icon buttons.
 
-### Planning Board (signature)
-A figure with a hairline caption bar, a tabular week header and nine phase rows. Completed bars are Chalk at 25%, the active bar is a Champagne outline filling with Champagne to today's position, planned bars are Hairline Strong outlines, and the final open-ended phase is dashed. Bars draw in left to right in sequence, then the 1px Champagne "vandaag" line slides into place with a small square Champagne tag.
+### E-Bar Glyph (brand)
+Three 2px bars, 12px wide, the middle one at 80%, taken from the logo's "E". Used in Champagne as the bullet for short feature lists (hero values, portal points). It replaces generic dots and checks.
 
-### Phase Tracker (signature)
-A nine-step rail of square nodes on a hairline track with a Champagne progress line; it auto-advances and can be stepped by the visitor. On the long timeline the spine fills Champagne with scroll and each square node lights and scales as it is passed, with a large faint phase numeral turning gold opposite.
+### Hero Slideshow (signature)
+Four kitchen photographs cross-fade (1.4s) every 6.5s, each easing from 108% to 100% scale over 9s. Below the copy, a hairline-ruled control row: a tabular "01 / 04" counter, one 2px marker per slide that fills Champagne from the left over the slide's duration, the slide caption in uppercase, and a square pause button. Autoplay and zoom stop under reduced motion.
+
+### Process Stepper (signature)
+Nine phases. From xl, a horizontal rail of nine columns: an 11px square node with a Champagne border on a Hairline Strong line that draws in, the tabular Champagne step number, the title with a small muted icon, and a short muted summary. Below xl, a vertical rail with the same nodes and the number set inline before the title.
+
+### Portal Dashboard Mockup (signature)
+A static, explicitly labelled preview ("Voorbeeldweergave") of the customer portal in a Board frame with a Hairline Strong border: window bar with three square dots, a sidebar (tabs on mobile) with a 1px Champagne active marker, project rows with a nine-segment phase bar (completed segments 45% Chalk, current segment Champagne) and a status badge, and a design-approval card with a render photo, version tag and two square actions, "Opmerking plaatsen" (outline) and "Akkoord geven" (Champagne). The row awaiting approval is highlighted with Champagne Wash and a 1px Champagne left edge.
+
+### Photo Bands
+Inner page heroes and the closing CTA strip sit on a full-bleed photograph under Ground gradients (the CTA photo additionally at 45% opacity). The CTA strip holds one Title line and one primary button.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep every corner square (0px), including nodes, bars, badges and focus states.
-- **Do** separate surfaces with 1px hairlines at 10% off-white (Hairline) and use Hairline Strong only on interactive controls.
-- **Do** reserve Champagne for the primary action, the active or passed phase, today, small functional icons, functional labels and the logo arc.
-- **Do** set headlines in Outfit 300 with negative tracking, and every week or phase number in tabular figures.
-- **Do** animate by drawing: scaleX from the left for lines and bars, masked word reveals for headings, all on cubic-bezier(0.16, 1, 0.3, 1).
-- **Do** stop marquees and pulses and collapse transitions under prefers-reduced-motion.
+- **Do** keep every corner square (0px), including nodes, markers, badges, photo frames and focus states.
+- **Do** lead with photography: darken it with Ground gradients from the left and the bottom so type clears contrast.
+- **Do** give each page exactly one Paper band, with Paper Ink text, Paper Muted support and Bronze for small accent text and links.
+- **Do** reserve Champagne on dark for the primary action, current state, progress and the logo arc.
+- **Do** use the E-bar glyph for short brand bullet lists and slide markers.
+- **Do** set headlines in Outfit 300 with negative tracking and line-height 1.05 to 1.1, and every step number or counter in tabular figures.
+- **Do** keep motion short and quiet: fades with a 16px lift (600ms), heading clip wipes (800ms), all on cubic-bezier(0.16, 1, 0.3, 1); let headings wait for the font, at most 700ms.
+- **Do** stop the slideshow autoplay and slow zoom and collapse transitions under prefers-reduced-motion.
 - **Do** write copy without em-dashes; use a colon, comma or full stop.
+- **Do** keep all imagery in one config so placeholders can be swapped for the client's own photographs.
 
 ### Don't:
 - **Don't** round any corner or use pill shapes.
+- **Don't** set Champagne text on Paper; it fails contrast.
+- **Don't** add a second Paper band to a page.
 - **Don't** add shadows to resting surfaces; the action glow on the primary button hover is the only shadow.
-- **Don't** use Champagne for decoration, large fills or body text.
-- **Don't** set headlines heavier than 300; hierarchy comes from size, not weight.
+- **Don't** set headlines heavier than 300 or with leading looser than 1.1.
+- **Don't** swap Outfit for a serif display face, even where photographic references use one.
 - **Don't** introduce a second accent hue; Signal Green and Signal Red are status only.
-- **Don't** use spring or bouncy easing; everything decelerates exponentially.
+- **Don't** use long staggered delays, word-by-word reveals or spring easing.

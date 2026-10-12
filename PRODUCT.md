@@ -10,7 +10,7 @@ web
 
 ## Stack
 
-Brief-pinned: Next.js (App Router) + TypeScript + Tailwind CSS, react-hook-form + zod, Motion, lucide-react. Hosted on Cloudflare Workers (free plan) through the OpenNext adapter.
+Brief-pinned: Next.js (App Router) + TypeScript + Tailwind CSS, react-hook-form + zod, Motion, lucide-react. Hosted on Cloudflare Workers (free plan) through the OpenNext adapter. Code on GitHub: thomasdevving/newera-website.
 
 ## Users
 
@@ -40,6 +40,8 @@ Requests usually arrive as floor plans (PDF/photo/DWG) by email. Buyers work wit
 - Name: Studio NewEra. Logo supplied by the user as an image: "STUDIO" small and widely spaced above a large geometric "NewEra" in off-white, the E drawn as three gold bars, a thin gold arc sweeping over the top right. Stored at `public/brand/logo.png`.
 - Visible copy in Dutch (nl-NL); tone professional, direct, calm, confident. No hype, no exclamation marks.
 - User's own direction for the site: as tight ("strak") as possible, few soft edges, medium to heavy animation, no em-dashes in copy.
+- Second round (client review, 2026-10-12): much shorter pages, subtle motion, photo-led look following a reference image the user supplied (full-bleed kitchen photography, one warm light band, uppercase navigation, slide counter). Keep Outfit and the logo's gold arc and "E" bars instead of copying the reference's serif.
+- Small uppercase section labels with a short rule above headings are wanted: the brief names the hero label "KEUKENS VOOR PROFESSIONALS" and the reference uses the same device.
 
 ## Evidence on Hand
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-09T10:34:40+00:00",
+  "generatedAt": "2026-10-12T18:14:12+00:00",
   "title": "Design System: Studio NewEra",
   "extensions": {
     "colorMeta": {
@@ -119,6 +119,21 @@
         "displayName": "Champagne Wash",
         "canonical": "rgba(201, 166, 107, 0.15)"
       },
+      "bronze": {
+        "role": "secondary",
+        "displayName": "Bronze",
+        "canonical": "#7a5b2b",
+        "tonalRamp": [
+          "oklch(15% 0.07 75)",
+          "oklch(25% 0.07 75)",
+          "oklch(36% 0.07 75)",
+          "oklch(48% 0.07 75)",
+          "oklch(60% 0.07 75)",
+          "oklch(72% 0.07 75)",
+          "oklch(84% 0.07 75)",
+          "oklch(95% 0.07 75)"
+        ]
+      },
       "hairline": {
         "role": "neutral",
         "displayName": "Hairline",
@@ -128,6 +143,56 @@
         "role": "neutral",
         "displayName": "Hairline Strong",
         "canonical": "rgba(245, 243, 239, 0.2)"
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#eeeae3",
+        "tonalRamp": [
+          "oklch(15% 0.012 80)",
+          "oklch(25% 0.012 80)",
+          "oklch(36% 0.012 80)",
+          "oklch(48% 0.012 80)",
+          "oklch(60% 0.012 80)",
+          "oklch(72% 0.012 80)",
+          "oklch(84% 0.012 80)",
+          "oklch(95% 0.012 80)"
+        ]
+      },
+      "paper-ink": {
+        "role": "neutral",
+        "displayName": "Paper Ink",
+        "canonical": "#16140f",
+        "tonalRamp": [
+          "oklch(15% 0.008 85)",
+          "oklch(25% 0.008 85)",
+          "oklch(36% 0.008 85)",
+          "oklch(48% 0.008 85)",
+          "oklch(60% 0.008 85)",
+          "oklch(72% 0.008 85)",
+          "oklch(84% 0.008 85)",
+          "oklch(95% 0.008 85)"
+        ]
+      },
+      "paper-muted": {
+        "role": "neutral",
+        "displayName": "Paper Muted",
+        "canonical": "#5c564c",
+        "tonalRamp": [
+          "oklch(15% 0.015 80)",
+          "oklch(25% 0.015 80)",
+          "oklch(36% 0.015 80)",
+          "oklch(48% 0.015 80)",
+          "oklch(60% 0.015 80)",
+          "oklch(72% 0.015 80)",
+          "oklch(84% 0.015 80)",
+          "oklch(95% 0.015 80)"
+        ]
+      },
+      "paper-line": {
+        "role": "neutral",
+        "displayName": "Paper Line",
+        "canonical": "rgba(22, 20, 15, 0.14)"
       },
       "signal-green": {
         "role": "tertiary",
@@ -163,31 +228,39 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Home hero headline only; masked word reveal."
+        "purpose": "Home hero headline only, max about 13ch."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Section and page headings."
+        "purpose": "Inner page hero headings, max about 20ch."
+      },
+      "headline-section": {
+        "displayName": "Headline Section",
+        "purpose": "Section headings on dark and on paper."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Phase titles, mobile menu items, panel headings."
+        "purpose": "Closing CTA line and large mobile menu items."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Running copy and hero subtext, 52 to 60ch."
+        "purpose": "Running copy; intros step up to 18 to 20px."
       },
       "body-small": {
         "displayName": "Body Small",
-        "purpose": "Field labels, definition lists, secondary text."
+        "purpose": "Summaries, field labels, inline text links."
+      },
+      "nav": {
+        "displayName": "Nav",
+        "purpose": "Desktop navigation, uppercase."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Uppercase functional labels: captions, footer headings, badges, the vandaag tag."
+        "purpose": "Uppercase functional labels: badges, slide captions, mockup tags."
       },
       "data": {
         "displayName": "Data",
-        "purpose": "Tabular week and phase numbers in Chalk Faint."
+        "purpose": "Step numbers, slide counter, counts; tabular."
       }
     },
     "shadows": [
@@ -201,12 +274,7 @@
       {
         "name": "ease-out-expo",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "The single easing for everything: drawn lines, reveals, state transitions."
-      },
-      {
-        "name": "ease-in-out",
-        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
-        "purpose": "Defined in lib/motion.ts for symmetric movement; rarely used."
+        "purpose": "The single easing for fades, wipes and state transitions."
       },
       {
         "name": "duration-fast",
@@ -216,22 +284,42 @@
       {
         "name": "duration-base",
         "value": "600ms",
-        "purpose": "Entrances, nav underline glide, menu items."
+        "purpose": "Reveal fades with a 16px lift; nav underline glide."
       },
       {
-        "name": "duration-slow",
-        "value": "1100ms",
-        "purpose": "Large reveals."
+        "name": "heading-wipe",
+        "value": "clip-path inset(0 0 100% 0) to open, translateY 16px to 0, 800ms ease-out-expo",
+        "purpose": "Headings wipe up as one block, after the web font loads (max 700ms wait)."
+      },
+      {
+        "name": "button-wipe",
+        "value": "scaleX 0 to 1, origin left, 500ms ease-out-expo",
+        "purpose": "Champagne Bright fill on primary button hover."
       },
       {
         "name": "draw-line",
         "value": "scaleX 0 to 1, origin left, 1.4s ease-out-expo",
-        "purpose": "Hairlines and planning bars draw in left to right."
+        "purpose": "Hairlines and the stepper rail."
       },
       {
-        "name": "word-reveal",
-        "value": "translateY 110% to 0 inside overflow mask, 1s ease-out-expo, 60ms stagger",
-        "purpose": "Headings set word by word."
+        "name": "slide-crossfade",
+        "value": "opacity, 1.4s ease-out-expo, every 6.5s",
+        "purpose": "Hero slideshow."
+      },
+      {
+        "name": "slow-zoom",
+        "value": "scale 1.08 to 1, 9s ease-out-expo",
+        "purpose": "Hero photographs."
+      },
+      {
+        "name": "slide-progress",
+        "value": "scaleX 0 to 1, linear, 6.5s",
+        "purpose": "Active slide marker fill."
+      },
+      {
+        "name": "arc-draw",
+        "value": "pathLength 0 to 1, 2.4s ease-out-expo",
+        "purpose": "Logo arc behind heroes."
       },
       {
         "name": "menu-wipe",
@@ -240,7 +328,7 @@
       },
       {
         "name": "reduced-motion",
-        "value": "marquee and pulse stop; transitions collapse to 0.01ms",
+        "value": "autoplay and slow zoom stop; transitions collapse to 0.01ms",
         "purpose": "Respect prefers-reduced-motion."
       }
     ],
@@ -255,15 +343,13 @@
       },
       {
         "name": "lg",
-        "value": "1024px"
-      },
-      {
-        "name": "nav",
-        "value": "1200px"
+        "value": "1024px",
+        "purpose": "Desktop nav, full-height hero lock"
       },
       {
         "name": "xl",
-        "value": "1280px"
+        "value": "1280px",
+        "purpose": "Horizontal process stepper"
       }
     ]
   },
@@ -272,81 +358,94 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The one gold action per view; lighter gold wipes in from the left on hover.",
-      "html": "<a class=\"ds-btn-primary\" href=\"#\"><span class=\"ds-btn-wipe\"></span><span>Aanvraag indienen</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
-      "css": ".ds-btn-primary{font-family:var(--font-sans, Outfit, ui-sans-serif, system-ui, sans-serif);position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 24px;background:#c9a66b;color:#0a0a0a;font-size:15px;font-weight:500;letter-spacing:0.01em;text-decoration:none;border-radius:0;transition:box-shadow .3s cubic-bezier(0.16,1,0.3,1)}.ds-btn-wipe{position:absolute;inset:0;z-index:-1;background:#dcbd86;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(0.16,1,0.3,1)}.ds-btn-primary:hover{box-shadow:0 8px 28px -12px rgba(201,166,107,0.75)}.ds-btn-primary:hover .ds-btn-wipe{transform:scaleX(1)}.ds-btn-primary:focus-visible{outline:1px solid #c9a66b;outline-offset:3px}"
+      "description": "The one primary action; gold fill with a lighter wipe on hover.",
+      "html": "<button class=\"ds-btn-primary\"><span class=\"ds-wipe\"></span><span>Aanvraag indienen</span></button>",
+      "css": ".ds-btn-primary{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;height:48px;padding:0 24px;background:var(--accent,#c9a66b);color:var(--bg,#0a0a0a);font:500 15px/1 Outfit,ui-sans-serif,system-ui,sans-serif;letter-spacing:.01em;border:0;border-radius:0;cursor:pointer;transition:box-shadow .3s cubic-bezier(.16,1,.3,1)}.ds-btn-primary .ds-wipe{position:absolute;inset:0;z-index:-1;background:var(--accent-bright,#dcbd86);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}.ds-btn-primary:hover{box-shadow:0 8px 28px -12px rgba(201,166,107,.75)}.ds-btn-primary:hover .ds-wipe{transform:scaleX(1)}.ds-btn-primary:focus-visible{outline:1px solid var(--accent,#c9a66b);outline-offset:3px}"
     },
     {
       "name": "Secondary Button",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Hairline-bordered square button; border and text turn gold on hover.",
-      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Inloggen</a>",
-      "css": ".ds-btn-secondary{font-family:var(--font-sans, Outfit, ui-sans-serif, system-ui, sans-serif);display:inline-flex;align-items:center;height:48px;padding:0 24px;border:1px solid rgba(245,243,239,0.2);color:#f5f3ef;background:transparent;font-size:15px;font-weight:500;letter-spacing:0.01em;text-decoration:none;border-radius:0;transition:color .3s cubic-bezier(0.16,1,0.3,1),border-color .3s cubic-bezier(0.16,1,0.3,1)}.ds-btn-secondary:hover{border-color:#c9a66b;color:#c9a66b}.ds-btn-secondary:focus-visible{outline:1px solid #c9a66b;outline-offset:3px}"
+      "description": "Outline button; turns gold on hover.",
+      "html": "<button class=\"ds-btn-secondary\">Inloggen</button>",
+      "css": ".ds-btn-secondary{display:inline-flex;align-items:center;height:48px;padding:0 24px;background:transparent;color:var(--text,#f5f3ef);border:1px solid var(--border-strong,rgba(245,243,239,.2));border-radius:0;font:500 15px/1 Outfit,ui-sans-serif,system-ui,sans-serif;letter-spacing:.01em;cursor:pointer;transition:color .3s,border-color .3s}.ds-btn-secondary:hover{color:var(--accent,#c9a66b);border-color:var(--accent,#c9a66b)}.ds-btn-secondary:focus-visible{outline:1px solid var(--accent,#c9a66b);outline-offset:3px}"
     },
     {
       "name": "Text Input",
       "kind": "input",
       "refersTo": "input",
-      "description": "Square board-filled field; gold border and raised fill on focus.",
-      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Projectnaam<span class=\"ds-req\"> *</span></span><input class=\"ds-input\" placeholder=\"Bijvoorbeeld Parkzicht fase 2\"></label>",
-      "css": ".ds-field{font-family:var(--font-sans, Outfit, ui-sans-serif, system-ui, sans-serif);display:flex;flex-direction:column;gap:8px;color:#f5f3ef;font-size:15px}.ds-req{color:#c9a66b}.ds-input{font:inherit;font-size:16px;height:48px;padding:0 16px;background:#121212;color:#f5f3ef;border:1px solid rgba(245,243,239,0.2);border-radius:0;transition:border-color .3s cubic-bezier(0.16,1,0.3,1),background-color .3s cubic-bezier(0.16,1,0.3,1)}.ds-input::placeholder{color:rgba(245,243,239,0.5)}.ds-input:hover{border-color:rgba(245,243,239,0.4)}.ds-input:focus{outline:none;border-color:#c9a66b;background:#181818}"
+      "description": "Square field on Board; gold border and raised fill on focus.",
+      "html": "<label class=\"ds-field\"><span>Bedrijfsnaam <b>*</b></span><input class=\"ds-input\" placeholder=\"Naam van uw bedrijf\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:8px;font:400 15px Outfit,ui-sans-serif,system-ui,sans-serif;color:var(--text,#f5f3ef)}.ds-field b{color:var(--accent,#c9a66b);font-weight:400}.ds-input{height:48px;padding:0 16px;background:var(--bg-elevated,#121212);color:var(--text,#f5f3ef);border:1px solid var(--border-strong,rgba(245,243,239,.2));border-radius:0;font:16px Outfit,ui-sans-serif,system-ui,sans-serif;transition:border-color .3s,background-color .3s}.ds-input:hover{border-color:rgba(245,243,239,.4)}.ds-input:focus{outline:none;border-color:var(--accent,#c9a66b);background:var(--bg-elevated-2,#181818)}"
     },
     {
       "name": "Navigation",
       "kind": "nav",
-      "refersTo": "",
-      "description": "Muted links with a drawn hover underline; the active item carries a 1px gold rule.",
-      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-link is-active\">Hoe het werkt</a><a href=\"#\" class=\"ds-nav-link\">Voor wie</a><a href=\"#\" class=\"ds-nav-link\">Over ons</a></nav>",
-      "css": ".ds-nav{font-family:var(--font-sans, Outfit, ui-sans-serif, system-ui, sans-serif);display:flex;gap:32px;padding:16px 0;border-bottom:1px solid rgba(245,243,239,0.1);background:#0a0a0a}.ds-nav-link{position:relative;padding:8px 0;font-size:14px;letter-spacing:0.02em;color:#a8a39a;text-decoration:none;transition:color .3s}.ds-nav-link::after{content:\"\";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:rgba(245,243,239,0.4);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(0.16,1,0.3,1)}.ds-nav-link:hover{color:#f5f3ef}.ds-nav-link:hover::after{transform:scaleX(1)}.ds-nav-link.is-active{color:#f5f3ef}.ds-nav-link.is-active::after{background:#c9a66b;transform:scaleX(1)}.ds-nav-link:focus-visible{outline:1px solid #c9a66b;outline-offset:3px}"
+      "refersTo": "nav",
+      "description": "Uppercase tracked labels; gold underline marks the current page.",
+      "html": "<nav class=\"ds-nav\"><a class=\"is-active\">Home</a><a>Werkwijze</a><a>Klantportal</a><a>Over ons</a><a>Contact</a></nav>",
+      "css": ".ds-nav{display:flex;gap:28px;padding:16px 0}.ds-nav a{position:relative;padding:8px 0;font:500 12px Outfit,ui-sans-serif,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,243,239,.7);cursor:pointer;transition:color .3s}.ds-nav a::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:rgba(245,243,239,.4);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}.ds-nav a:hover{color:var(--text,#f5f3ef)}.ds-nav a:hover::after{transform:scaleX(1)}.ds-nav a.is-active{color:var(--text,#f5f3ef)}.ds-nav a.is-active::after{background:var(--accent,#c9a66b);transform:scaleX(1)}"
     },
     {
       "name": "Badge",
       "kind": "chip",
       "refersTo": "badge-accent",
-      "description": "Square status label; accent, neutral, success and muted tones.",
-      "html": "<span class=\"ds-badge ds-badge-accent\">Lopend</span> <span class=\"ds-badge\">Gepland</span> <span class=\"ds-badge ds-badge-success\">Afgerond</span>",
-      "css": ".ds-badge{font-family:var(--font-sans, Outfit, ui-sans-serif, system-ui, sans-serif);display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid rgba(245,243,239,0.2);color:#f5f3ef;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:0}.ds-badge-accent{border-color:rgba(201,166,107,0.6);background:rgba(201,166,107,0.15);color:#c9a66b}.ds-badge-success{border-color:rgba(111,191,142,0.5);color:#6fbf8e}"
+      "description": "Square status label; accent tone for the state that needs action.",
+      "html": "<span class=\"ds-badge ds-badge-accent\">Ontwerp ter goedkeuring</span> <span class=\"ds-badge\">Besteld</span>",
+      "css": ".ds-badge{display:inline-flex;align-items:center;height:24px;padding:0 8px;border:1px solid var(--border-strong,rgba(245,243,239,.2));color:var(--text,#f5f3ef);font:500 11px Outfit,ui-sans-serif,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;border-radius:0}.ds-badge-accent{border-color:rgba(201,166,107,.6);background:var(--accent-soft,rgba(201,166,107,.15));color:var(--accent,#c9a66b)}"
     },
     {
-      "name": "Card",
+      "name": "Paper Band Card",
       "kind": "card",
-      "refersTo": "card",
-      "description": "Flat board panel with a hairline border; no shadow.",
-      "html": "<div class=\"ds-card\"><p class=\"ds-card-num\">03</p><h3 class=\"ds-card-title\">Offerte</h3><p class=\"ds-card-body\">Een heldere prijs per woningtype.</p></div>",
-      "css": ".ds-card{font-family:var(--font-sans, Outfit, ui-sans-serif, system-ui, sans-serif);background:#121212;border:1px solid rgba(245,243,239,0.1);border-radius:0;padding:32px;color:#f5f3ef;max-width:360px}.ds-card-num{font-variant-numeric:tabular-nums;font-size:14px;color:#a8a39a;margin:0}.ds-card-title{font-size:28px;font-weight:300;letter-spacing:-0.02em;margin:12px 0 0}.ds-card-body{font-size:15px;line-height:1.6;color:#a8a39a;margin:12px 0 0}"
+      "refersTo": "paper-band",
+      "description": "Step card on the one warm paper band per page; bronze accents, gold top line on hover.",
+      "html": "<div class=\"ds-paper\"><div class=\"ds-paper-card\"><span class=\"ds-n\">01</span><h3>Aanvraag</h3><p>U dient uw project in met de basisgegevens.</p></div></div>",
+      "css": ".ds-paper{background:var(--paper,#eeeae3);color:var(--paper-ink,#16140f);padding:32px;font-family:Outfit,ui-sans-serif,system-ui,sans-serif}.ds-paper-card{position:relative;max-width:280px;padding:32px;border:1px solid var(--paper-line,rgba(22,20,15,.14));transition:background-color .5s}.ds-paper-card::before{content:'';position:absolute;left:0;top:0;width:100%;height:2px;background:var(--accent,#c9a66b);transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.16,1,.3,1)}.ds-paper-card:hover{background:rgba(22,20,15,.03)}.ds-paper-card:hover::before{transform:scaleX(1)}.ds-n{font-size:12px;letter-spacing:.2em;font-variant-numeric:tabular-nums;color:var(--paper-muted,#5c564c)}.ds-paper-card h3{margin:32px 0 8px;font-weight:400;font-size:20px}.ds-paper-card p{margin:0;font-size:15px;line-height:1.4;color:var(--paper-muted,#5c564c)}"
     },
     {
-      "name": "Planning Board",
+      "name": "E-Bar List",
       "kind": "custom",
-      "refersTo": "",
-      "description": "Signature: phase rows over week columns with flat bars and the gold vandaag line.",
-      "html": "<figure class=\"ds-plan\"><div class=\"ds-plan-row\"><span>Meten</span><div class=\"ds-plan-track\"><i class=\"ds-bar ds-done\" style=\"left:5%;width:30%\"></i></div></div><div class=\"ds-plan-row ds-active\"><span>Bestelling</span><div class=\"ds-plan-track\"><i class=\"ds-bar ds-live\" style=\"left:35%;width:30%\"><b style=\"width:45%\"></b></i></div></div><div class=\"ds-plan-row\"><span>Montage</span><div class=\"ds-plan-track\"><i class=\"ds-bar ds-planned\" style=\"left:65%;width:30%\"></i></div></div><div class=\"ds-today\"><em>Vandaag</em></div></figure>",
-      "css": ".ds-plan{font-family:var(--font-sans, Outfit, ui-sans-serif, system-ui, sans-serif);position:relative;margin:0;padding-top:24px;max-width:560px;background:#0a0a0a;color:#a8a39a;font-size:13px}.ds-plan-row{display:grid;grid-template-columns:110px 1fr;height:32px;border-bottom:1px solid rgba(245,243,239,0.1);align-items:center}.ds-plan-row.ds-active{color:#c9a66b}.ds-plan-track{position:relative;height:100%;background-image:linear-gradient(to right,rgba(245,243,239,0.1) 1px,transparent 1px);background-size:12.5% 100%}.ds-bar{position:absolute;top:50%;height:10px;transform:translateY(-50%);transform-origin:left;animation:ds-draw .9s cubic-bezier(0.16,1,0.3,1) both}.ds-bar b{position:absolute;inset:0 auto 0 0;background:#c9a66b}.ds-done{background:rgba(245,243,239,0.25)}.ds-live{border:1px solid #c9a66b}.ds-planned{border:1px solid rgba(245,243,239,0.2)}.ds-today{position:absolute;top:0;bottom:0;left:calc(110px + (100% - 110px)*0.485);width:1px;background:#c9a66b}.ds-today em{position:absolute;top:2px;left:50%;transform:translateX(-50%);background:#c9a66b;color:#0a0a0a;font-style:normal;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:2px 6px}@keyframes ds-draw{from{transform:translateY(-50%) scaleX(0)}to{transform:translateY(-50%) scaleX(1)}}@media (prefers-reduced-motion:reduce){.ds-bar{animation:none}}"
+      "description": "Short brand bullet list using the three bars of the logo's E.",
+      "html": "<ul class=\"ds-ebars\"><li><span class=\"ds-e\"><i></i><i></i><i></i></span>Snel</li><li><span class=\"ds-e\"><i></i><i></i><i></i></span>Overzichtelijk</li><li><span class=\"ds-e\"><i></i><i></i><i></i></span>Betrouwbaar</li></ul>",
+      "css": ".ds-ebars{display:flex;gap:28px;list-style:none;margin:0;padding:0;font:14px Outfit,ui-sans-serif,system-ui,sans-serif;letter-spacing:.04em;color:rgba(245,243,239,.8)}.ds-ebars li{display:flex;align-items:center;gap:10px}.ds-e{display:inline-flex;flex-direction:column;gap:2px;width:12px;color:var(--accent,#c9a66b)}.ds-e i{display:block;height:2px;width:100%;background:currentColor}.ds-e i:nth-child(2){width:80%}"
     },
     {
-      "name": "Phase Node",
+      "name": "Slide Markers",
       "kind": "custom",
-      "refersTo": "phase-node",
-      "description": "Signature: 11px square node on a hairline spine; fills gold and scales when passed.",
-      "html": "<div class=\"ds-rail\"><span class=\"ds-node is-passed\"></span><span class=\"ds-node is-passed\"></span><span class=\"ds-node\"></span><span class=\"ds-node\"></span></div>",
-      "css": ".ds-rail{position:relative;display:flex;justify-content:space-between;width:320px;padding:20px 0;background:#0a0a0a;background-image:linear-gradient(#c9a66b,#c9a66b),linear-gradient(rgba(245,243,239,0.2),rgba(245,243,239,0.2));background-size:40% 1px,100% 1px;background-position:left center,left center;background-repeat:no-repeat}.ds-node{position:relative;width:11px;height:11px;border:1px solid rgba(245,243,239,0.2);background:#0a0a0a;border-radius:0;transition:background-color .7s cubic-bezier(0.16,1,0.3,1),border-color .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1)}.ds-node.is-passed{background:#c9a66b;border-color:#c9a66b;transform:scale(1.25)}.ds-node:hover{border-color:#c9a66b}"
+      "refersTo": "slide-marker",
+      "description": "Hero slideshow control row: counter, 2px markers filling gold, caption.",
+      "html": "<div class=\"ds-slides\"><span class=\"ds-count\">01 / 04</span><button class=\"is-active\"><i></i></button><button><i></i></button><button><i></i></button><button><i></i></button><span class=\"ds-cap\">Materiaal en detail</span></div>",
+      "css": ".ds-slides{display:flex;align-items:center;gap:8px;padding-top:20px;border-top:1px solid var(--border,rgba(245,243,239,.1));font:12px Outfit,ui-sans-serif,system-ui,sans-serif;letter-spacing:.18em;color:rgba(245,243,239,.8)}.ds-count{width:56px;margin-right:12px;font-variant-numeric:tabular-nums}.ds-slides button{display:flex;align-items:center;width:48px;height:24px;padding:0;background:none;border:0;cursor:pointer}.ds-slides button i{display:block;position:relative;width:100%;height:2px;background:rgba(245,243,239,.25);transition:background-color .3s}.ds-slides button:hover i{background:rgba(245,243,239,.5)}.ds-slides button.is-active i{background:var(--accent,#c9a66b)}.ds-slides button:focus-visible{outline:1px solid var(--accent,#c9a66b);outline-offset:3px}.ds-cap{margin-left:12px;text-transform:uppercase}"
+    },
+    {
+      "name": "Step Node",
+      "kind": "custom",
+      "refersTo": "step-node",
+      "description": "Square node, gold number and title on the nine-step process rail.",
+      "html": "<ol class=\"ds-steps\"><li><span class=\"ds-node\"></span><p>01</p><h3>Aanvraag</h3></li><li><span class=\"ds-node\"></span><p>02</p><h3>Uitwerking</h3></li><li><span class=\"ds-node\"></span><p>03</p><h3>Ontwerp</h3></li></ol>",
+      "css": ".ds-steps{position:relative;display:grid;grid-template-columns:repeat(3,140px);gap:20px;list-style:none;margin:0;padding:0;font-family:Outfit,ui-sans-serif,system-ui,sans-serif;color:var(--text,#f5f3ef)}.ds-steps::before{content:'';position:absolute;left:0;right:0;top:5px;height:1px;background:var(--border-strong,rgba(245,243,239,.2))}.ds-node{position:relative;display:block;width:11px;height:11px;border:1px solid var(--accent,#c9a66b);background:var(--bg,#0a0a0a)}.ds-steps p{margin:20px 0 0;font-size:12px;letter-spacing:.18em;font-variant-numeric:tabular-nums;color:var(--accent,#c9a66b)}.ds-steps h3{margin:8px 0 0;font-size:18px;font-weight:400}"
     }
   ],
   "narrative": {
-    "northStar": "The Bouwplanning",
-    "overview": "The whole system is a construction schedule pinned to a dark wall. Week columns, phase rows, flat bars and square nodes are not decoration on top of the page; they are the page's grammar. Being on schedule is shown, never claimed: a gold \"vandaag\" line crossing a planning says more than any slogan.\n\nThe surface is a near-black ground with off-white type set large and light, divided by 1px hairlines. Champagne gold is the one voice and it marks only what is live: the primary action, the active phase, today, small functional icons and the logo arc. Everything is cut square; the user asked for a site \"zo strak mogelijk\", with as few soft edges as possible, and the build carries zero corner radius everywhere.\n\nMotion behaves like a plan being set out: lines draw from left to right, words rise out of a mask as if being typeset, and everything decelerates on one exponential ease-out. Motion is medium to heavy by request, and always yields to reduced-motion preferences.",
+    "northStar": "The Dark Showroom",
+    "overview": "The site is a short, dark, premium showroom where the kitchens do the talking. Full-bleed photography carries the first impression: a full-height slideshow of kitchens on the home page, darkened photographs behind inner page heroes and behind the closing call-to-action strip. Off-white light type sits over deep gradients that darken from the left and the bottom, so the words always read and the photograph keeps its warmth on the right.\n\nAgainst the near-black, each page turns over once into a warm paper band: a light, calm section in dark ink where the process, the audience or the values are explained. That single change of material is the page's breath; it is never repeated twice on one page. Champagne gold remains the one voice on the dark ground and marks what is live or actionable; on paper, gold fails contrast for text, so small accent text there turns bronze.\n\nThe brand is carried by two pieces of the logo: the thin gold arc, which draws itself in behind heroes, and the three bars of the \"E\", now a glyph for bullets and the slide markers. Every corner is square, by the user's request for a site \"zo strak mogelijk\". Motion is subtle by client request: short fades and wipes on one exponential ease-out, no long delays, and headings wait for the web font so they never reflow mid-animation.",
     "keyCharacteristics": [
+      "Photo-led: full-height kitchen slideshow with slow zoom, darkened photos behind page heroes and the closing strip.",
       "Near-black ground, off-white light type, champagne gold reserved for what is live.",
-      "Planning-board grammar: week columns, phase rows, flat bars, square nodes, tabular week numbers.",
-      "1px hairlines at 10% off-white as the only structure; no shadows at rest.",
-      "Zero corner radius on every element.",
-      "Drawn lines, masked word reveals, one exponential ease-out."
+      "One warm paper band per page, dark ink, bronze for small accent text.",
+      "The logo's arc and its \"E\" bars as the only brand devices.",
+      "Zero corner radius on every element; 1px hairlines as structure; no shadows at rest.",
+      "Subtle motion: short fades and clip wipes, one exponential ease-out."
     ],
     "rules": [
       {
         "name": "The Live Gold Rule",
-        "body": "Champagne marks only what is active, current or actionable. If an element is neither the next action nor the current state, it is chalk or hairline.",
+        "body": "On the dark ground, Champagne marks only what is active, current or actionable. If an element is neither the next action nor the current state, it is chalk or hairline.",
+        "section": "colors"
+      },
+      {
+        "name": "The Bronze On Paper Rule",
+        "body": "Gold never sets text on Paper. Small accent text, links and icons there are Bronze; Champagne may appear on Paper only as a non-text hover line.",
         "section": "colors"
       },
       {
@@ -355,23 +454,23 @@
         "section": "colors"
       },
       {
-        "name": "The Light Headline Rule",
-        "body": "Headings are weight 300 with negative tracking. Weight 500 is reserved for buttons and labels. Weight 600 is loaded but unused in the build; keep it for rare emphasis inside data, never for headlines.",
+        "name": "The Tight Heading Rule",
+        "body": "Headings sit at line-height 1.05 to 1.1, never looser; the user asked for tighter heading spacing and the build holds it everywhere.",
         "section": "typography"
       },
       {
-        "name": "The Tabular Week Rule",
-        "body": "Every week number, phase number and count is set with tabular numerals so columns align like a schedule.",
+        "name": "The Light Weight Rule",
+        "body": "Headlines are Outfit 300; hierarchy comes from size, not weight.",
         "section": "typography"
       },
       {
-        "name": "The Schedule Grid Rule",
-        "body": "Things that represent time sit on columns that represent weeks; nothing time-related floats free of the grid.",
+        "name": "The One Paper Band Rule",
+        "body": "Each page gets exactly one Paper section. Two light bands on one page break the dark showroom.",
         "section": "layout"
       },
       {
-        "name": "The Flat Board Rule",
-        "body": "Surfaces are flat at rest; separate them with a tonal step or a hairline, not a shadow.",
+        "name": "The Gradient Not Shadow Rule",
+        "body": "Photos are made legible with Ground gradients; nothing floats on a drop shadow.",
         "section": "elevation"
       },
       {
@@ -381,21 +480,26 @@
       }
     ],
     "dos": [
-      "Do keep every corner square (0px), including nodes, bars, badges and focus states.",
-      "Do separate surfaces with 1px hairlines at 10% off-white (Hairline) and use Hairline Strong only on interactive controls.",
-      "Do reserve Champagne for the primary action, the active or passed phase, today, small functional icons, functional labels and the logo arc.",
-      "Do set headlines in Outfit 300 with negative tracking, and every week or phase number in tabular figures.",
-      "Do animate by drawing: scaleX from the left for lines and bars, masked word reveals for headings, all on cubic-bezier(0.16, 1, 0.3, 1).",
-      "Do stop marquees and pulses and collapse transitions under prefers-reduced-motion.",
-      "Do write copy without em-dashes; use a colon, comma or full stop."
+      "**Do** keep every corner square (0px), including nodes, markers, badges, photo frames and focus states.",
+      "**Do** lead with photography: darken it with Ground gradients from the left and the bottom so type clears contrast.",
+      "**Do** give each page exactly one Paper band, with Paper Ink text, Paper Muted support and Bronze for small accent text and links.",
+      "**Do** reserve Champagne on dark for the primary action, current state, progress and the logo arc.",
+      "**Do** use the E-bar glyph for short brand bullet lists and slide markers.",
+      "**Do** set headlines in Outfit 300 with negative tracking and line-height 1.05 to 1.1, and every step number or counter in tabular figures.",
+      "**Do** keep motion short and quiet: fades with a 16px lift (600ms), heading clip wipes (800ms), all on cubic-bezier(0.16, 1, 0.3, 1); let headings wait for the font, at most 700ms.",
+      "**Do** stop the slideshow autoplay and slow zoom and collapse transitions under prefers-reduced-motion.",
+      "**Do** write copy without em-dashes; use a colon, comma or full stop.",
+      "**Do** keep all imagery in one config so placeholders can be swapped for the client's own photographs."
     ],
     "donts": [
-      "Don't round any corner or use pill shapes.",
-      "Don't add shadows to resting surfaces; the action glow on the primary button hover is the only shadow.",
-      "Don't use Champagne for decoration, large fills or body text.",
-      "Don't set headlines heavier than 300; hierarchy comes from size, not weight.",
-      "Don't introduce a second accent hue; Signal Green and Signal Red are status only.",
-      "Don't use spring or bouncy easing; everything decelerates exponentially."
+      "**Don't** round any corner or use pill shapes.",
+      "**Don't** set Champagne text on Paper; it fails contrast.",
+      "**Don't** add a second Paper band to a page.",
+      "**Don't** add shadows to resting surfaces; the action glow on the primary button hover is the only shadow.",
+      "**Don't** set headlines heavier than 300 or with leading looser than 1.1.",
+      "**Don't** swap Outfit for a serif display face, even where photographic references use one.",
+      "**Don't** introduce a second accent hue; Signal Green and Signal Red are status only.",
+      "**Don't** use long staggered delays, word-by-word reveals or spring easing."
     ]
   }
 }
