@@ -60,7 +60,7 @@ export async function POST(request: Request) {
       subject: `Nieuwe aanvraag: ${data.project} (${data.aantalKeukens} keukens)`,
       replyTo: data.email,
       text: [
-        `Bedrijf: ${data.bedrijfsnaam} (${data.organisatieType})`,
+        `Bedrijf: ${data.bedrijfsnaam} (${data.organisatieType || "type niet opgegeven"})`,
         `Contact: ${data.contactpersoon}${data.functie ? `, ${data.functie}` : ""}`,
         `E-mail: ${data.email}`,
         `Telefoon: ${data.telefoon}`,

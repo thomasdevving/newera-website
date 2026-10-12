@@ -1,27 +1,27 @@
 import type { Metadata } from "next";
-import { Bell, FileUp, FolderOpen, Layers, MessagesSquare } from "lucide-react";
-import { CtaBanner } from "@/components/sections/CtaBanner";
+import { CalendarDays, ClipboardList, Eye, FileClock, Layers, LifeBuoy, Ruler } from "lucide-react";
 import { DashboardMockup } from "@/components/sections/DashboardMockup";
 import { PageHero } from "@/components/sections/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Klantportal",
   description:
-    "De klantportal van Studio NewEra wordt de centrale plek per project: aanvragen indienen, offertes en tekeningen inzien en de status per fase volgen.",
+    "De klantportal van Studio NewEra wordt de centrale plek per project: aanvragen, status per fase, ontwerpen goedkeuren, afspraken en servicemeldingen.",
   alternates: { canonical: "/klantportal" },
 };
 
-const features = [
-  { icon: FileUp, title: "Aanvraag indienen met bijlagen", text: "Plattegronden, aantallen en leverperiode in één gestructureerde aanvraag." },
-  { icon: FolderOpen, title: "Offertes en tekeningen inzien", text: "Altijd de actuele versie, per project en per keukentype." },
-  { icon: Layers, title: "Projectstatus per fase", text: "Zie in één oogopslag waar elk project staat, van aanvraag tot oplevering." },
-  { icon: Bell, title: "Automatische meldingen", text: "Bijvoorbeeld wanneer meten ingepland moet worden of er iets aangeleverd moet worden." },
-  { icon: MessagesSquare, title: "Communicatie gebundeld", text: "Alle berichten en documenten per project op één plek, in plaats van verspreid over e-mail." },
+const clientFeatures = [
+  { icon: ClipboardList, text: "Aanvraag indienen met plattegronden" },
+  { icon: Layers, text: "Projectstatus per fase volgen" },
+  { icon: Eye, text: "Ontwerpen en renderings bekijken, opmerkingen plaatsen en akkoord geven" },
+  { icon: CalendarDays, text: "Afspraken inplannen" },
+  { icon: FileClock, text: "Bestel- en projecthistorie inzien" },
+  { icon: LifeBuoy, text: "Klachten en servicemeldingen indienen met foto's" },
 ];
 
 export default function KlantportalPage() {
@@ -29,10 +29,10 @@ export default function KlantportalPage() {
     <>
       <PageHero
         label="Klantportal"
-        title="Eén plek per project, voor alles wat u nodig heeft."
-        intro="In de klantportal volgt u straks per project de status, bekijkt u offertes en tekeningen en ontvangt u een melding wanneer er iets van u nodig is."
+        title="Eén plek voor elk project."
+        intro="De klantportal wordt de centrale plek voor elk project: voor opdrachtgevers, voor ons team en voor onze monteurs."
       >
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
           <Button href={siteConfig.cta.login.href} size="lg" arrow>
             {siteConfig.cta.login.label}
           </Button>
@@ -40,41 +40,37 @@ export default function KlantportalPage() {
         </div>
       </PageHero>
 
-      <Section>
+      <Section compact className="pt-12 md:pt-16">
         <DashboardMockup />
-        <p className="mt-4 text-sm text-muted">Voorbeeldweergave. Projectnamen, aantallen en statussen zijn ter illustratie.</p>
       </Section>
 
-      <Section ruled>
-        <SectionHeader
-          label="Functies"
-          title="Wat de klantportal u gaat bieden."
-          intro="De portal wordt stap voor stap beschikbaar. Lopende projecten blijven tot die tijd via uw vaste contactpersoon verlopen."
-        />
-        <ul className="grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-3">
-          {features.map(({ icon: Icon, title, text }, index) => (
-            <Reveal
-              as="li"
-              key={title}
-              delay={(index % 3) * 0.1}
-              className="group border-b border-r border-line p-7 transition-colors duration-500 hover:bg-elevated md:p-9"
-            >
-              <span className="inline-flex h-11 w-11 items-center justify-center border border-line-strong text-accent transition-colors duration-500 group-hover:border-accent">
-                <Icon aria-hidden className="h-5 w-5" strokeWidth={1.5} />
+      <section className="surface-paper py-14 md:py-20" aria-labelledby="voor-opdrachtgevers">
+        <Container className="grid gap-10 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-4">
+            <h2 id="voor-opdrachtgevers" className="text-[clamp(1.75rem,3.2vw,2.5rem)] font-light leading-[1.1] tracking-[-0.02em]">
+              Voor opdrachtgevers
+            </h2>
+            <p className="mt-4 text-paper-muted">Wat u in de portal kunt doen.</p>
+          </div>
+          <ul className="grid border-l border-t border-paper-line sm:grid-cols-2 lg:col-span-8">
+            {clientFeatures.map(({ icon: Icon, text }, index) => (
+              <Reveal as="li" key={text} delay={index * 0.04} className="flex items-start gap-4 border-b border-r border-paper-line p-5 md:p-6">
+                <Icon aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-accent-deep" strokeWidth={1.5} />
+                <span className="leading-snug">{text}</span>
+              </Reveal>
+            ))}
+          </ul>
+          <div className="flex items-start gap-4 border-t border-paper-line pt-6 lg:col-span-8 lg:col-start-5">
+            <Ruler aria-hidden className="mt-1 h-5 w-5 shrink-0 text-accent-deep" strokeWidth={1.5} />
+            <p>
+              <span className="font-medium">Voor monteurs.</span>{" "}
+              <span className="text-paper-muted">
+                Onze monteurs leggen meet- en locatiegegevens digitaal vast, zodat montage en levering beter voorbereid zijn.
               </span>
-              <h3 className="mt-8 text-xl text-ink">{title}</h3>
-              <p className="mt-2 text-muted">{text}</p>
-            </Reveal>
-          ))}
-          <Reveal as="li" delay={0.2} className="flex flex-col justify-between gap-8 border-b border-r border-line bg-elevated p-7 md:p-9">
-            <p className="text-xl font-light leading-snug">Heeft u al een project bij ons lopen?</p>
-            <Button href={siteConfig.cta.login.href} variant="secondary" arrow>
-              Naar inloggen
-            </Button>
-          </Reveal>
-        </ul>
-      </Section>
-      <CtaBanner />
+            </p>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }

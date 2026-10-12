@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Cloudflare Workers has no built-in Next.js image optimizer; assets are pre-sized
   images: { unoptimized: true },
+  // Old routes merged into /werkwijze
+  async redirects() {
+    return [
+      { source: "/hoe-het-werkt", destination: "/werkwijze", permanent: true },
+      { source: "/voor-wie", destination: "/werkwijze#voor-wie", permanent: true },
+    ];
+  },
   turbopack: {
     rules: {
       "*.css": {

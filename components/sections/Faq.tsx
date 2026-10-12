@@ -8,9 +8,9 @@ import { easeOut } from "@/lib/motion";
 
 export type FaqItem = { question: string; answer: string };
 
-/** Accordion; one item open at a time. */
+/** Accordion; closed by default, one item open at a time. */
 export function Faq({ items }: { items: FaqItem[] }) {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
   const baseId = useId();
 
   return (

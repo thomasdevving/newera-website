@@ -24,7 +24,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageHero label="Contact" title="Neem contact op." intro="Voor algemene vragen, samenwerking of een lopend project." arc={false} />
+      <PageHero label="Contact" title="Neem contact op." intro="Voor algemene vragen, samenwerking of een lopend project." />
       <Container className="grid gap-16 py-16 md:py-24 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-4">
           <ul className="border-t border-line">

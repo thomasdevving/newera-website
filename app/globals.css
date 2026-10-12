@@ -13,6 +13,12 @@
   --accent-soft: rgba(201, 166, 107, 0.15);
   --border: rgba(245, 243, 239, 0.1);
   --border-strong: rgba(245, 243, 239, 0.2);
+  /* Warm light band, used for one section per page */
+  --paper: #eeeae3;
+  --paper-ink: #16140f;
+  --paper-muted: #5c564c;
+  --paper-line: rgba(22, 20, 15, 0.14);
+  --accent-deep: #7a5b2b;
   --success: #6fbf8e;
   --error: #e07a6b;
 
@@ -33,6 +39,11 @@
   --color-accent-soft: var(--accent-soft);
   --color-line: var(--border);
   --color-line-strong: var(--border-strong);
+  --color-paper: var(--paper);
+  --color-paper-ink: var(--paper-ink);
+  --color-paper-muted: var(--paper-muted);
+  --color-paper-line: var(--paper-line);
+  --color-accent-deep: var(--accent-deep);
   --color-success: var(--success);
   --color-error: var(--error);
 
@@ -139,6 +150,29 @@ input:-webkit-autofill {
 
 /* ---------- Utilities ---------- */
 
+/* Light band: dark ink on warm paper, bronze for small accent text */
+.surface-paper {
+  background: var(--paper);
+  color: var(--paper-ink);
+}
+.surface-paper ::selection {
+  background: var(--paper-ink);
+  color: var(--paper);
+}
+.surface-paper :focus-visible {
+  outline-color: var(--accent-deep);
+}
+
+/* Slow zoom on hero photographs */
+@keyframes slow-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 /* Small uppercase label with wide tracking */
 .label-caps {
   font-size: 0.75rem;
@@ -153,33 +187,14 @@ input:-webkit-autofill {
   background-size: calc(100% / var(--cols, 12)) 100%;
 }
 
-/* Continuous marquee, paused for reduced motion */
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-.marquee {
-  animation: marquee 40s linear infinite;
+.slow-zoom {
+  animation: slow-zoom 9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes pulse-line {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
-}
-.pulse-line {
-  animation: pulse-line 2.4s ease-in-out infinite;
-}
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee,
-  .pulse-line {
-    animation: none;
+  .slow-zoom {
+    animation: none !important;
   }
   *,
   *::before,

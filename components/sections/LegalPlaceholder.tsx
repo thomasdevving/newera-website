@@ -6,7 +6,7 @@ import { PageHero } from "./PageHero";
 export function LegalPlaceholder({ title }: { title: string }) {
   return (
     <>
-      <PageHero label="Juridisch" title={title} arc={false} />
+      <PageHero label="Juridisch" title={title} />
       <Container className="py-16 md:py-24">
         <div className="max-w-[68ch] space-y-5 text-lg text-muted lg:ml-[25%]">
           <p className="text-ink">Tekst volgt.</p>

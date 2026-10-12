@@ -69,7 +69,7 @@ export function FileDrop({ files, onChange, disabled }: FileDropProps) {
         onDragLeave={() => setDragging(false)}
         onDrop={onDrop}
         className={cn(
-          "group relative flex cursor-pointer flex-col outline-offset-2 has-[input:focus-visible]:outline has-[input:focus-visible]:outline-1 has-[input:focus-visible]:outline-accent items-center justify-center gap-3 overflow-hidden border border-dashed px-6 py-12 text-center transition-colors duration-300",
+          "group relative flex cursor-pointer flex-col outline-offset-2 has-[input:focus-visible]:outline has-[input:focus-visible]:outline-1 has-[input:focus-visible]:outline-accent items-center justify-center gap-2 overflow-hidden border border-dashed px-6 py-7 text-center transition-colors duration-300",
           dragging ? "border-accent bg-accent-soft" : "border-line-strong bg-elevated hover:border-accent",
           (disabled || full) && "pointer-events-none opacity-50",
         )}

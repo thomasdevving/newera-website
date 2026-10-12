@@ -15,7 +15,7 @@ export function Section({ ruled, compact, className, containerClassName, childre
     <section
       className={cn(
         "relative",
-        compact ? "py-16 md:py-20" : "py-24 md:py-32 xl:py-[140px]",
+        compact ? "py-12 md:py-14" : "py-16 md:py-24 xl:py-[100px]",
         ruled && "border-t border-line",
         className,
       )}

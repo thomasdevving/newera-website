@@ -9,10 +9,10 @@ export function Footer() {
 
   return (
     <footer className="relative border-t border-line">
-      <Container className="grid gap-14 py-16 md:py-20 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-4">
+      <Container className="grid grid-cols-2 gap-x-6 gap-y-10 py-12 md:py-14 lg:grid-cols-12 lg:gap-10">
+        <div className="col-span-2 lg:col-span-4">
           <Logo height={40} />
-          <p className="mt-6 max-w-[36ch] text-muted">{siteConfig.tagline}</p>
+          <p className="mt-5 max-w-[36ch] text-muted">{siteConfig.tagline}</p>
         </div>
 
         <nav aria-label="Footernavigatie" className="lg:col-span-2 lg:col-start-6">
@@ -46,7 +46,7 @@ export function Footer() {
           </address>
         </div>
 
-        <div className="lg:col-span-2">
+        <div className="col-span-2 lg:col-span-2">
           <h2 className="label-caps mb-5 text-accent">Gegevens</h2>
           <ul className="space-y-3 text-muted">
             <li>KvK {contact.kvk}</li>

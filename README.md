@@ -31,12 +31,11 @@ The site runs on Cloudflare Workers (free plan) via `@opennextjs/cloudflare`. Co
 ```
 app/
   (marketing)/          Public pages with the shared Header and Footer
-    page.tsx            Home
-    hoe-het-werkt/      Process timeline and FAQ
-    voor-wie/           Audience overview
-    klantportal/        Portal explanation with dashboard mockup
-    aanvraag/           Project request form
-    over-ons/           About, values, team and reference placeholders
+    page.tsx            Home: hero, 4-step werkwijze, portal teaser, closing CTA
+    werkwijze/          9-step process, audiences (#voor-wie), FAQ
+    klantportal/        Portal scope with dashboard mockup
+    aanvraag/           Project request form (optional details collapsed)
+    over-ons/           Story and values
     contact/            Contact details and form
     privacy/, voorwaarden/   Legal placeholders
   portal/               Future customer portal (own layout, no marketing chrome)
@@ -44,14 +43,14 @@ app/
   api/contact/          POST, JSON, validates and forwards the message
   not-found.tsx, sitemap.ts, robots.ts, icon.svg
 components/
-  ui/                   Button, Input, Select, Textarea, Checkbox, Field, Card, Badge, Section, Container, Logo, ...
-  sections/             Hero, PlanningBoard, ProcessPreview, ProcessTimeline, DashboardMockup, AudienceGrid, Faq, CtaBanner, ...
+  ui/                   Button, Input, Select, Textarea, Checkbox, Field, Badge, Bars, Photo, Section, Container, Logo
+  sections/             Hero, ProcessOverview, ProcessStepper, PortalTeaser, DashboardMockup, Faq, CtaBanner, PageHero, Arc, ...
   forms/                AanvraagForm, ContactForm, FileDrop, Honeypot
   motion/               Reveal, RevealText, DrawLine, FadeIn, MotionProvider
   layout/               Header, Footer
 lib/
-  site-config.ts        Name, contact placeholders, navigation, logo and image slots
-  process.ts            The nine project phases (used by home, timeline and mockup)
+  site-config.ts        Name, contact placeholders, navigation, logo and all photography
+  process.ts            The nine project phases and the four-step homepage summary
   schemas.ts            Shared zod schemas and attachment rules (client and server)
   mailer.ts             Mail adapter (console by default, Resend optional)
   storage.ts            File storage adapter (discards files by default)
@@ -64,7 +63,7 @@ lib/
 | --- | --- |
 | Company name, contact details, KvK, btw, address, response time | `lib/site-config.ts` |
 | Logo | Replace `public/brand/logo.webp` (shown on the site; `logo.png` is the full-size source), or change `siteConfig.logo` (path and pixel size). Only `components/ui/Logo.tsx` reads it. |
-| Photography | Put files in `public/images/` and set the paths in `images` in `lib/site-config.ts`. Empty slots show "Afbeelding volgt". |
+| Photography | All photos are placeholders from Unsplash, set in `images` in `lib/site-config.ts`. Put the client's own photos in `public/images/` and replace each `src` with a path such as `/images/hero-1.jpg` (export them about 2200px wide). |
 | Process phases and texts | `lib/process.ts` |
 | Open Graph image | `public/og.png` (1200x630) |
 | Favicon | `app/icon.svg` |
@@ -92,7 +91,11 @@ On Cloudflare Workers the request body limit is 100 MB on the free plan, so the 
 
 ## Adding the customer portal
 
-`app/portal` already has its own layout without the marketing header. Add authentication (NextAuth, Clerk or Supabase Auth) in `app/portal/layout.tsx` and build pages such as `app/portal/projecten`. The design tokens, UI components and `lib/process.ts` phases are shared, and `DashboardMockup` shows the intended status model.
+`app/portal` already has its own layout without the marketing header. The decided scope is a web app for three roles: clients, the Studio NewEra team and installers. Add authentication (NextAuth, Clerk or Supabase Auth) in `app/portal/layout.tsx` and build pages such as `app/portal/projecten`. The design tokens, UI components and `lib/process.ts` phases are shared, and `DashboardMockup` shows the intended navigation (Projecten, Ontwerpen, Afspraken, Service), status model and design-approval flow.
+
+## Redirects
+
+`/hoe-het-werkt` and `/voor-wie` were merged into `/werkwijze`. Permanent redirects live in `next.config.ts`.
 
 ## Cookies and analytics
 
@@ -102,11 +105,16 @@ No tracking scripts are included. If analytics are added, a consent banner belon
 
 - The user supplied the logo as an image. It was cropped and made transparent (`public/brand/logo.png`) and is used instead of a text-based placeholder.
 - The user asked for a design that is as tight as possible: all corners are square (radius 0) instead of the 8 to 10 px in the original brief, and blur or glow is limited to the logo arc and the sticky header.
-- Motion is on the generous side, as requested: masked headline reveals, drawn hairlines, a hero planning that draws itself, an auto-advancing phase tracker and a scroll-driven process timeline. Everything respects `prefers-reduced-motion`.
+- After client feedback, motion is subtle: short fades and wipes, a hero slideshow with a slow zoom (with a pause button) and no long entrance delays. Headings wait at most 700 ms for the web font so their line breaks never jump. Everything respects `prefers-reduced-motion`.
+- The second round followed a photography-led reference supplied by the user, without copying it: the typeface stays Outfit (matching the wordmark) instead of a serif, and the logo's gold arc and the three bars of its "E" are used as recurring motifs.
+- One warm light band per page echoes the reference. On that band small accent text uses a darker bronze (#7a5b2b) because champagne gold does not meet contrast on a light background.
+- All photography is placeholder imagery from Unsplash (free license), hotlinked so it can be swapped in one place. Captions on the hero slides describe themes, not real projects.
+- "Type organisatie" became optional in the request form, consistently on client and server.
+- The homepage keeps two CTA areas (hero and closing strip) because the brief asks for both there; every other page has at most one.
 - No em dashes are used in visible copy.
 - The brief asked for "je/jij" in form microcopy, but all literal copy in the brief (validation messages, confirmation, process steps) uses "u". The site uses "u" consistently.
 - Outfit was chosen from the two allowed fonts because its geometric forms and single-storey "a" match the wordmark.
-- Week numbers, project names and statuses in the hero planning and the portal mockup are demonstration data and labelled "Voorbeeldplanning" or "Voorbeeldweergave".
+- Project names, numbers, statuses and notifications in the portal mockup are demonstration data and labelled "Voorbeeldweergave".
 - The rate limiter is in memory. On Cloudflare Workers each isolate has its own window; use a shared store (KV, Durable Objects) for strict limits.
 - The copyright year is rendered at build time.
 
@@ -115,8 +123,8 @@ No tracking scripts are included. If analytics are added, a consent banner belon
 - Contact details: address, postal code and city, phone, email, opening hours
 - KvK number, btw number, statutory name
 - Response time in working days (`responseDays`)
-- Final copy for Over ons, team introduction and references
+- Final copy for Over ons
 - Privacy statement and terms and conditions
-- Photography (team, workshop, projects)
+- Photography to replace the placeholders: 4 hero kitchens, a material close-up, a building, plans or drawings, a design render for the portal mockup, and an Over ons image
 - Email credentials (Resend or SMTP) and a storage provider for attachments
 - The production domain (`NEXT_PUBLIC_SITE_URL`)

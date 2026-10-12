@@ -25,7 +25,7 @@ export default function AanvraagPage() {
         label="Aanvraag indienen"
         title="Vertel ons over uw project."
         intro="Hoe completer de aanvraag, hoe sneller wij met de uitwerking kunnen beginnen. Een plattegrond kunt u ook later aanvullen."
-        arc={false}
+       
       />
       <Container className="grid gap-16 py-16 md:py-24 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-8">

@@ -1,17 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type BaseSyntheticEvent, type ReactNode } from "react";
+import { useState, type BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "motion/react";
-import { Check, CircleAlert, LoaderCircle, RotateCcw } from "lucide-react";
+import { Check, CircleAlert, LoaderCircle, Plus, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Field, describedBy } from "@/components/ui/Field";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
+import { cn } from "@/lib/cn";
 import { easeOut } from "@/lib/motion";
 import { aanvraagSchema, formatFileSize, HONEYPOT_FIELD, organisationTypes, type AanvraagInput, type FormResponse } from "@/lib/schemas";
 import { siteConfig } from "@/lib/site-config";
@@ -19,6 +20,8 @@ import { FileDrop } from "./FileDrop";
 import { Honeypot } from "./Honeypot";
 
 type Status = "idle" | "submitting" | "success" | "error";
+
+const OPTIONAL_FIELDS = ["organisatieType", "functie", "leverperiode", "specificaties", "opmerkingen"] as const;
 
 const defaultValues: AanvraagInput = {
   bedrijfsnaam: "",
@@ -39,6 +42,7 @@ export function AanvraagForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState<string | null>(null);
   const [files, setFiles] = useState<File[]>([]);
+  const [moreOpen, setMoreOpen] = useState(false);
   const [submitted, setSubmitted] = useState<{ values: AanvraagInput; files: File[] } | null>(null);
 
   const {
@@ -48,6 +52,10 @@ export function AanvraagForm() {
     reset,
     formState: { errors },
   } = useForm<AanvraagInput>({ resolver: zodResolver(aanvraagSchema), mode: "onTouched", defaultValues });
+
+  // Errors inside the collapsed section must never stay hidden
+  const hiddenError = OPTIONAL_FIELDS.some((name) => errors[name]);
+  if (hiddenError && !moreOpen) setMoreOpen(true);
 
   const onSubmit = async (values: AanvraagInput, event?: BaseSyntheticEvent) => {
     setStatus("submitting");
@@ -70,6 +78,7 @@ export function AanvraagForm() {
         setStatus("success");
         reset(defaultValues);
         setFiles([]);
+        setMoreOpen(false);
         document.getElementById("aanvraag-top")?.scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
@@ -109,34 +118,17 @@ export function AanvraagForm() {
             transition={{ duration: 0.5, ease: easeOut }}
             aria-busy={submitting}
           >
-            <p className="mb-10 text-sm text-muted">
+            <p className="mb-8 text-sm text-muted">
               Velden met <span className="text-accent">*</span> zijn verplicht.
             </p>
 
-            <FormSection index={1} title="Organisatie">
+            <fieldset className="grid gap-5 md:grid-cols-2">
+              <legend className="sr-only">Uw gegevens en project</legend>
               <Field id="bedrijfsnaam" label="Bedrijfsnaam" required error={errors.bedrijfsnaam?.message}>
                 <Input {...field("bedrijfsnaam")} autoComplete="organization" {...register("bedrijfsnaam")} />
               </Field>
-              <Field id="organisatieType" label="Type organisatie" required error={errors.organisatieType?.message}>
-                <Select {...field("organisatieType")} {...register("organisatieType")}>
-                  <option value="" disabled>
-                    Kies een type
-                  </option>
-                  {organisationTypes.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </Select>
-              </Field>
-            </FormSection>
-
-            <FormSection index={2} title="Contactpersoon">
               <Field id="contactpersoon" label="Contactpersoon" required error={errors.contactpersoon?.message}>
                 <Input {...field("contactpersoon")} autoComplete="name" {...register("contactpersoon")} />
-              </Field>
-              <Field id="functie" label="Functie" error={errors.functie?.message}>
-                <Input {...field("functie")} autoComplete="organization-title" placeholder="Bijvoorbeeld werkvoorbereider" {...register("functie")} />
               </Field>
               <Field id="email" label="E-mailadres" required error={errors.email?.message}>
                 <Input {...field("email")} type="email" autoComplete="email" inputMode="email" {...register("email")} />
@@ -144,68 +136,104 @@ export function AanvraagForm() {
               <Field id="telefoon" label="Telefoonnummer" required error={errors.telefoon?.message}>
                 <Input {...field("telefoon")} type="tel" autoComplete="tel" inputMode="tel" placeholder="06 12345678" {...register("telefoon")} />
               </Field>
-            </FormSection>
-
-            <FormSection index={3} title="Project">
-              <Field id="project" label="Projectnaam of locatie" required error={errors.project?.message} className="md:col-span-2">
+              <Field id="project" label="Projectnaam of locatie" required error={errors.project?.message}>
                 <Input {...field("project")} {...register("project")} />
               </Field>
               <Field id="aantalKeukens" label="Aantal keukens" required error={errors.aantalKeukens?.message}>
                 <Input {...field("aantalKeukens")} type="number" min={1} step={1} inputMode="numeric" {...register("aantalKeukens")} />
               </Field>
-              <Field
-                id="leverperiode"
-                label="Gewenste leverweek of periode"
-                hint="Bijvoorbeeld week 40 2026"
-                error={errors.leverperiode?.message}
-              >
-                <Input {...field("leverperiode", "Bijvoorbeeld week 40 2026")} {...register("leverperiode")} />
-              </Field>
-              <Field
-                id="specificaties"
-                label="Merkvoorkeur of specificaties"
-                hint="Merk, kleur, apparatuur of andere eisen, als die al bekend zijn."
-                error={errors.specificaties?.message}
-                className="md:col-span-2"
-              >
-                <Textarea {...field("specificaties", "Merk, kleur, apparatuur of andere eisen, als die al bekend zijn.")} {...register("specificaties")} />
-              </Field>
-            </FormSection>
+            </fieldset>
 
-            <FormSection index={4} title="Plattegronden en bijlagen" single>
+            <fieldset className="mt-8">
+              <legend className="mb-3 flex w-full items-baseline justify-between text-[15px]">
+                <span>Plattegronden en bijlagen</span>
+                <span className="text-xs text-muted">Optioneel</span>
+              </legend>
               <FileDrop files={files} onChange={setFiles} disabled={submitting} />
-            </FormSection>
+            </fieldset>
 
-            <FormSection index={5} title="Afronden" single>
-              <Field id="opmerkingen" label="Opmerkingen" error={errors.opmerkingen?.message}>
-                <Textarea {...field("opmerkingen")} {...register("opmerkingen")} />
-              </Field>
-              <div className="flex flex-col gap-2">
-                <Checkbox
-                  id="privacy"
-                  {...describedBy("privacy", { error: errors.privacy?.message })}
-                  label={
-                    <>
-                      Ik ga akkoord met de{" "}
-                      <Link href="/privacy" target="_blank" className="text-accent underline">
-                        privacyverklaring
-                      </Link>
-                      <span className="text-accent" aria-hidden>
-                        {" "}
-                        *
-                      </span>
-                    </>
-                  }
-                  {...register("privacy")}
-                />
-                {errors.privacy?.message && (
-                  <p id="privacy-error" role="alert" className="flex items-center gap-2 pl-8 text-sm text-error">
-                    {errors.privacy.message}
-                  </p>
-                )}
-              </div>
-              <Honeypot />
-            </FormSection>
+            {/* Optional details, collapsed by default */}
+            <div className="mt-8 border-y border-line">
+              <button
+                type="button"
+                onClick={() => setMoreOpen((open) => !open)}
+                aria-expanded={moreOpen}
+                aria-controls="meer-details"
+                className="group flex w-full items-center justify-between gap-4 py-4 text-left text-[15px] transition-colors hover:text-accent"
+              >
+                <span>
+                  Meer details <span className="text-muted">(optioneel)</span>
+                </span>
+                <span
+                  className={cn(
+                    "inline-flex h-8 w-8 items-center justify-center border transition-[transform,border-color,background-color,color] duration-500 ease-out-expo",
+                    moreOpen ? "rotate-45 border-accent bg-accent text-bg" : "border-line-strong group-hover:border-accent",
+                  )}
+                >
+                  <Plus aria-hidden className="h-4 w-4" strokeWidth={1.5} />
+                </span>
+              </button>
+              <motion.div
+                id="meer-details"
+                initial={false}
+                animate={{ height: moreOpen ? "auto" : 0, opacity: moreOpen ? 1 : 0 }}
+                transition={{ duration: 0.45, ease: easeOut }}
+                className="overflow-hidden"
+                inert={!moreOpen}
+              >
+                <fieldset className="grid gap-5 pb-6 pt-1 md:grid-cols-2">
+                  <legend className="sr-only">Meer details</legend>
+                  <Field id="organisatieType" label="Type organisatie" error={errors.organisatieType?.message}>
+                    <Select {...field("organisatieType")} {...register("organisatieType")}>
+                      <option value="">Kies een type</option>
+                      {organisationTypes.map((type) => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
+                      ))}
+                    </Select>
+                  </Field>
+                  <Field id="functie" label="Functie" error={errors.functie?.message}>
+                    <Input {...field("functie")} autoComplete="organization-title" placeholder="Bijvoorbeeld werkvoorbereider" {...register("functie")} />
+                  </Field>
+                  <Field id="leverperiode" label="Gewenste leverweek of periode" hint="Bijvoorbeeld week 40 2026" error={errors.leverperiode?.message}>
+                    <Input {...field("leverperiode", "Bijvoorbeeld week 40 2026")} {...register("leverperiode")} />
+                  </Field>
+                  <Field id="specificaties" label="Merkvoorkeur of specificaties" error={errors.specificaties?.message} className="md:col-span-2">
+                    <Textarea rows={3} {...field("specificaties")} placeholder="Merk, kleur, apparatuur of andere eisen" {...register("specificaties")} />
+                  </Field>
+                  <Field id="opmerkingen" label="Opmerkingen" error={errors.opmerkingen?.message} className="md:col-span-2">
+                    <Textarea rows={3} {...field("opmerkingen")} {...register("opmerkingen")} />
+                  </Field>
+                </fieldset>
+              </motion.div>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-2">
+              <Checkbox
+                id="privacy"
+                {...describedBy("privacy", { error: errors.privacy?.message })}
+                label={
+                  <>
+                    Ik ga akkoord met de{" "}
+                    <Link href="/privacy" target="_blank" className="text-accent underline">
+                      privacyverklaring
+                    </Link>
+                    <span className="text-accent" aria-hidden>
+                      {" "}
+                      *
+                    </span>
+                  </>
+                }
+                {...register("privacy")}
+              />
+              {errors.privacy?.message && (
+                <p id="privacy-error" role="alert" className="flex items-center gap-2 pl-8 text-sm text-error">
+                  {errors.privacy.message}
+                </p>
+              )}
+            </div>
+            <Honeypot />
 
             <AnimatePresence>
               {status === "error" && serverError && (
@@ -217,7 +245,7 @@ export function AanvraagForm() {
                   transition={{ duration: 0.4, ease: easeOut }}
                   className="overflow-hidden"
                 >
-                  <div className="mb-8 flex gap-4 border border-error/50 bg-error/10 p-5">
+                  <div className="mt-8 flex gap-4 border border-error/50 bg-error/10 p-5">
                     <CircleAlert aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-error" strokeWidth={1.5} />
                     <div>
                       <p className="text-ink">Uw aanvraag is niet verzonden.</p>
@@ -228,7 +256,7 @@ export function AanvraagForm() {
               )}
             </AnimatePresence>
 
-            <div className="flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-8 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-muted">Wij gebruiken uw gegevens alleen om uw aanvraag te behandelen.</p>
               <Button type="submit" size="lg" disabled={submitting} arrow={!submitting}>
                 {submitting ? (
@@ -253,30 +281,11 @@ export function AanvraagForm() {
   );
 }
 
-function FormSection({ index, title, single, children }: { index: number; title: string; single?: boolean; children: ReactNode }) {
-  return (
-    <motion.fieldset
-      className="mb-14 grid gap-6 border-t border-line pt-8 md:grid-cols-[180px_1fr] md:gap-10"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -5% 0px" }}
-      transition={{ duration: 0.7, ease: easeOut }}
-    >
-      <legend className="sr-only">{title}</legend>
-      <p aria-hidden className="flex items-baseline gap-3 text-ink">
-        <span className="tabular text-xs tracking-[0.2em] text-accent">{String(index).padStart(2, "0")}</span>
-        <span className="text-lg">{title}</span>
-      </p>
-      <div className={single ? "flex flex-col gap-6" : "grid gap-6 md:grid-cols-2"}>{children}</div>
-    </motion.fieldset>
-  );
-}
-
 function Confirmation({ submitted, onReset }: { submitted: { values: AanvraagInput; files: File[] }; onReset: () => void }) {
   const { values, files } = submitted;
   const summary: Array<[string, string]> = [
     ["Bedrijfsnaam", values.bedrijfsnaam],
-    ["Type organisatie", values.organisatieType],
+    ["Type organisatie", values.organisatieType || "Niet opgegeven"],
     ["Contactpersoon", [values.contactpersoon, values.functie].filter(Boolean).join(", ")],
     ["E-mailadres", values.email],
     ["Telefoonnummer", values.telefoon],

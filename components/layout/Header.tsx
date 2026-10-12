@@ -69,8 +69,8 @@ export function Header() {
         <Container className="flex h-[var(--header-h)] items-center justify-between gap-6">
           <Logo height={34} priority className="shrink-0" />
 
-          <nav aria-label="Hoofdnavigatie" className="hidden min-[1200px]:block">
-            <ul className="flex items-center gap-8">
+          <nav aria-label="Hoofdnavigatie" className="hidden lg:block">
+            <ul className="flex items-center gap-7 xl:gap-9">
               {siteConfig.nav.map((item) => {
                 const active = isActive(pathname, item.href);
                 return (
@@ -79,8 +79,8 @@ export function Header() {
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "group relative block py-2 text-[14px] tracking-[0.02em] transition-colors duration-300",
-                        active ? "text-ink" : "text-muted hover:text-ink",
+                        "group relative block py-2 text-[12px] font-medium uppercase tracking-[0.16em] transition-colors duration-300",
+                        active ? "text-ink" : "text-ink/70 hover:text-ink",
                       )}
                     >
                       {item.label}
@@ -104,7 +104,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="hidden min-[1200px]:block">
+            <div className="hidden lg:block">
               <Button href={siteConfig.cta.login.href} variant="secondary" size="sm">
                 {siteConfig.cta.login.label}
               </Button>
@@ -121,7 +121,7 @@ export function Header() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label="Menu openen"
-              className="inline-flex h-10 w-10 items-center justify-center border border-line-strong text-ink transition-colors hover:border-accent hover:text-accent min-[1200px]:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center border border-line-strong text-ink transition-colors hover:border-accent hover:text-accent lg:hidden"
             >
               <Menu className="h-5 w-5" strokeWidth={1.5} />
             </button>

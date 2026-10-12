@@ -24,7 +24,8 @@ const required = (message: string) => z.string().trim().min(1, message);
 
 export const aanvraagSchema = z.object({
   bedrijfsnaam: required("Vul uw bedrijfsnaam in").max(120, "Gebruik maximaal 120 tekens"),
-  organisatieType: z.enum(organisationTypes, { message: "Kies het type organisatie" }),
+  // Optional: empty string means "not specified"
+  organisatieType: z.enum(["", ...organisationTypes], { message: "Kies een geldig type organisatie" }),
   contactpersoon: required("Vul de naam van de contactpersoon in").max(120, "Gebruik maximaal 120 tekens"),
   functie: z.string().trim().max(120, "Gebruik maximaal 120 tekens"),
   email: required("Vul uw e-mailadres in").pipe(z.email("Voer een geldig e-mailadres in")),

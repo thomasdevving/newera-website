@@ -35,8 +35,7 @@ export const siteConfig = {
 
   nav: [
     { label: "Home", href: "/" },
-    { label: "Hoe het werkt", href: "/hoe-het-werkt" },
-    { label: "Voor wie", href: "/voor-wie" },
+    { label: "Werkwijze", href: "/werkwijze" },
     { label: "Klantportal", href: "/klantportal" },
     { label: "Over ons", href: "/over-ons" },
     { label: "Contact", href: "/contact" },
@@ -54,16 +53,29 @@ export const siteConfig = {
 } as const;
 
 /**
- * Image slots. `src: null` renders a labelled placeholder.
- * Drop real photography in /public/images and set the path here.
+ * Builds an Unsplash image URL at a given width. Placeholder photography only:
+ * replace with the client's own photos by pointing `src` at /public/images/...
+ */
+export const unsplash = (id: string) => `https://images.unsplash.com/photo-${id}`;
+
+export type ImageSlot = { src: string; alt: string };
+
+/**
+ * All imagery in one place. Every `src` is either an Unsplash placeholder
+ * (made with `unsplash()`) or a local path such as "/images/hero-1.jpg".
  */
 export const images = {
-  about: { src: null as string | null, alt: "Werkplaats van Studio NewEra" },
-  team: [
-    { src: null as string | null, alt: "[Naam], [Functie]", name: "[Naam]", role: "[Functie]" },
-    { src: null as string | null, alt: "[Naam], [Functie]", name: "[Naam]", role: "[Functie]" },
-    { src: null as string | null, alt: "[Naam], [Functie]", name: "[Naam]", role: "[Functie]" },
+  hero: [
+    { src: unsplash("1759147960461-b74a7e9a75d4"), alt: "Donkere keuken met houten kookeiland en barkrukken", caption: "Ontwerp per woningtype" },
+    { src: unsplash("1776831293955-f569f2f3a4b5"), alt: "Keuken met marmeren eiland in warm licht", caption: "Materiaal en detail" },
+    { src: unsplash("1758448755927-e5c5ae14790c"), alt: "Kookeiland met marmeren accenten en hanglamp", caption: "Montage volgens planning" },
+    { src: unsplash("1632583824020-937ae9564495"), alt: "Moderne keuken met bar en houten wandkasten", caption: "Oplevering per woning" },
   ],
+  materials: { src: unsplash("1752321532730-ed24a51e7b3f"), alt: "Donkere houtfineer met gouden nerf" },
+  building: { src: unsplash("1624204386084-dd8c05e32226"), alt: "Appartementengebouw met balkons in avondlicht" },
+  floorPlan: { src: unsplash("1603901622056-0a5bee231395"), alt: "Bouwtekeningen met potloden op een werktafel" },
+  render: { src: unsplash("1778731660388-36c3a51bed99"), alt: "Ontwerp van een keuken met kookeiland en barkrukken" },
+  about: { src: unsplash("1752321532314-90800e0e8c2a"), alt: "Stalen van natuurlijke materialen naast elkaar" },
 } as const;
 
 export type NavItem = (typeof siteConfig.nav)[number];
