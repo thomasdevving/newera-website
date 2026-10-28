@@ -20,7 +20,7 @@ export function PageHero({ label, title, intro, children, image }: PageHeroProps
     <section className="relative overflow-hidden border-b border-line">
       {image ? (
         <div aria-hidden className="absolute inset-0">
-          <Photo src={image.src} alt="" priority sizes="100vw" />
+          <Photo src={image.src} srcSet={image.srcSet} alt="" priority sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/85 to-bg/35" />
           <div className="absolute inset-0 bg-gradient-to-t from-bg/70 via-transparent to-bg/70" />
         </div>

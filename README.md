@@ -63,9 +63,9 @@ lib/
 | --- | --- |
 | Company name, contact details, KvK, btw, address, response time | `lib/site-config.ts` |
 | Logo | Replace `public/brand/logo.webp` (shown on the site; `logo.png` is the full-size source), or change `siteConfig.logo` (path and pixel size). Only `components/ui/Logo.tsx` reads it. |
-| Photography | All photos are placeholders from Unsplash, set in `images` in `lib/site-config.ts`. Put the client's own photos in `public/images/` and replace each `src` with a path such as `/images/hero-1.jpg` (export them about 2200px wide). |
+| Photography | Set in `images` in `lib/site-config.ts`. The hero kitchens and the portal render are local WebP files in `public/images/`, exported at several widths as `{name}-{width}.webp` and listed with `local(name, widths)`. The other slots are still Unsplash placeholders. To add a photo, export it with `convert photo.jpg -strip -resize 800x -quality 80 public/images/name-800.webp` (and again at the larger widths, up to the photo's own size) and add `local("name", [800, ...])`; a single file with a plain `src` such as `/images/hero-1.jpg` also works. |
 | Process phases and texts | `lib/process.ts` |
-| Open Graph image | `public/og.png` (1200x630) |
+| Open Graph image | `public/og.png` (1200x630): the dark hero kitchen with the logo |
 | Favicon | `app/icon.svg` |
 
 ## Environment variables
@@ -108,7 +108,7 @@ No tracking scripts are included. If analytics are added, a consent banner belon
 - After client feedback, motion is subtle: short fades and wipes, a hero slideshow with a slow zoom (with a pause button) and no long entrance delays. Headings wait at most 700 ms for the web font so their line breaks never jump. Everything respects `prefers-reduced-motion`.
 - The second round followed a photography-led reference supplied by the user, without copying it: the typeface stays Outfit (matching the wordmark) instead of a serif, and the logo's gold arc and the three bars of its "E" are used as recurring motifs.
 - One warm light band per page echoes the reference. On that band small accent text uses a darker bronze (#7a5b2b) because champagne gold does not meet contrast on a light background.
-- All photography is placeholder imagery from Unsplash (free license), hotlinked so it can be swapped in one place. Captions on the hero slides describe themes, not real projects.
+- The four hero kitchens (also used for the design render in the portal mockup and the Open Graph image) are visualisations the user supplied. One carried a red logo and QR code in its bottom-right corner; it was cropped above them. The remaining photos (material close-up, building, drawings, Over ons) are Unsplash placeholders (free license), hotlinked so they can be swapped in one place. Captions on the hero slides describe themes, not real projects.
 - "Type organisatie" became optional in the request form, consistently on client and server.
 - The homepage keeps two CTA areas (hero and closing strip) because the brief asks for both there; every other page has at most one.
 - No em dashes are used in visible copy.
@@ -125,6 +125,7 @@ No tracking scripts are included. If analytics are added, a consent banner belon
 - Response time in working days (`responseDays`)
 - Final copy for Over ons
 - Privacy statement and terms and conditions
-- Photography to replace the placeholders: 4 hero kitchens, a material close-up, a building, plans or drawings, a design render for the portal mockup, and an Over ons image
+- Confirmation that the supplied kitchen visualisations may be published, or replacements of at least 2000px wide (two of them are 1544px, which is slightly soft on large screens)
+- Photography to replace the remaining placeholders: a material close-up, a building, plans or drawings, and an Over ons image
 - Email credentials (Resend or SMTP) and a storage provider for attachments
 - The production domain (`NEXT_PUBLIC_SITE_URL`)

@@ -45,7 +45,7 @@ export function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1.4, ease: easeOut }}
           >
-            <Photo src={slides[active].src} alt="" priority={active === 0} className="slow-zoom" />
+            <Photo src={slides[active].src} srcSet={slides[active].srcSet} alt="" priority={active === 0} className="slow-zoom" />
           </motion.div>
         </AnimatePresence>
         {/* Legibility: dark from the left and the bottom, light touch on the right */}

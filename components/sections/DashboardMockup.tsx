@@ -191,7 +191,7 @@ function ApprovalCard({ horizontal = false }: { horizontal?: boolean }) {
   return (
     <div className={cn("p-4 md:p-5", horizontal && "grid gap-4 border-t border-line sm:grid-cols-[200px_1fr] sm:items-center")}>
       <div className="relative aspect-[16/10] overflow-hidden border border-line">
-        <Photo src={images.render.src} alt="" sizes="320px" />
+        <Photo src={images.render.src} srcSet={images.render.srcSet} alt="" sizes="320px" />
         <span className="absolute left-2 top-2 bg-bg/85 px-1.5 py-0.5 text-[10px] font-medium tracking-[0.1em] text-accent">v2</span>
       </div>
       <div className={cn(!horizontal && "mt-4")}>
